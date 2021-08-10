@@ -1,0 +1,9 @@
+apollo:
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
+    namespaces: permission.yaml
+  meta: http://apollo-configservice-test.paas-pro.haier.net
+app:
+  id: S02022
