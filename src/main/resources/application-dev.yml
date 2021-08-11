@@ -2,10 +2,10 @@
 server:
   port: 60002
   servlet:
-    context-path: /demo
+    context-path: /api
 spring:
   application:
-    name: demo
+    name: server
   servlet:
     multipart:
       max-file-size: 500MB
@@ -95,31 +95,10 @@ xxl:
       logretentiondays: 30
       port: 12001
       logpath: /data/applogs/xxl-job/jobhandler
-hac:
-  webservice:
-    user:
-      group:
-        add: http://hac.hoptest.haier.net:1027/com.haier.openplatform.hac.service.HacUserGroupServiceCli?wsdl
-      privilege:
-        add: http://hac.hoptest.haier.net:1030/com.haier.openplatform.hac.service.HacUserDataPrivilegeServiceCli?wsdl
 
-# 应用行为中心 运行端配置
-abm:
-  clientId: 9f2485484bebb0388a8a24e793ba2b72
-  clientKey: UzAyMDIy
-  contact: hpctest@haier.net
+DLM:
+  url:
+    login: http://8.133.177.11/login
+    info: http://8.133.177.11/userinfo
+    times: http://8.133.177.11/ai_times
 
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 60000
-
-ribbon:
-  ReadTimeout: 50000
-  ConnectTimeout: 50000
-  MaxAutoRetries: 0
-  MaxAutoRetriesNextServer: 1
