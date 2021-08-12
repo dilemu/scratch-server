@@ -7,9 +7,9 @@ package com.example.server.model.vo;
  * @date 2021/8/12 18:44
  */
 public class CharacterResult<T> {
-    private Integer log_id = 0;
-    private Integer codes_result_num = 0;
-    private Integer words_result_num = 0;
+    private String log_id = "";
+    private String codes_result_num = "0";
+    private String words_result_num = "0";
     private T words_result;
     private T code_result;
 
@@ -20,7 +20,7 @@ public class CharacterResult<T> {
         super();
     }
 
-    private CharacterResult(Integer log_id, Integer codes_result_num, Integer words_result_num, T words_result, T code_result) {
+    private CharacterResult(String log_id, String codes_result_num, String words_result_num, T words_result, T code_result) {
         super();
         this.log_id = log_id;
         this.codes_result_num = codes_result_num;
@@ -30,7 +30,7 @@ public class CharacterResult<T> {
     }
 
     public static <T> CharacterResult<T> success(T result, T data) {
-        return new CharacterResult<>(0, 0, 0, result, data);
+        return new CharacterResult<>("", "", "", result, data);
     }
 
     /**
@@ -40,27 +40,27 @@ public class CharacterResult<T> {
         return error(message);
     }
 
-    public Integer getLog_id() {
+    public String getLog_id() {
         return log_id;
     }
 
-    public void setLog_id(Integer log_id) {
+    public void setLog_id(String log_id) {
         this.log_id = log_id;
     }
 
-    public Integer getCodes_result_num() {
+    public String getCodes_result_num() {
         return codes_result_num;
     }
 
-    public void setCodes_result_num(Integer codes_result_num) {
+    public void setCodes_result_num(String codes_result_num) {
         this.codes_result_num = codes_result_num;
     }
 
-    public Integer getWords_result_num() {
+    public String getWords_result_num() {
         return words_result_num;
     }
 
-    public void setWords_result_num(Integer words_result_num) {
+    public void setWords_result_num(String words_result_num) {
         this.words_result_num = words_result_num;
     }
 
