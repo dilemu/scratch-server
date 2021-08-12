@@ -1,9 +1,25 @@
 package com.example.server.utils;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +27,12 @@ import java.util.Map;
 /**
  * http 工具类
  */
-public class HttpUtil {
+public class HttpUtils {
 
     public static String post(String requestUrl, String accessToken, String params)
             throws Exception {
         String contentType = "application/x-www-form-urlencoded";
-        return HttpUtil.post(requestUrl, accessToken, contentType, params);
+        return HttpUtils.post(requestUrl, accessToken, contentType, params);
     }
 
     public static String post(String requestUrl, String accessToken, String contentType, String params)
@@ -25,13 +41,13 @@ public class HttpUtil {
         if (requestUrl.contains("nlp")) {
             encoding = "GBK";
         }
-        return HttpUtil.post(requestUrl, accessToken, contentType, params, encoding);
+        return HttpUtils.post(requestUrl, accessToken, contentType, params, encoding);
     }
 
     public static String post(String requestUrl, String accessToken, String contentType, String params, String encoding)
             throws Exception {
         String url = requestUrl + "?access_token=" + accessToken;
-        return HttpUtil.postGeneralUrl(url, contentType, params, encoding);
+        return HttpUtils.postGeneralUrl(url, contentType, params, encoding);
     }
 
     public static String postGeneralUrl(String generalUrl, String contentType, String params, String encoding)
@@ -73,5 +89,14 @@ public class HttpUtil {
         in.close();
         System.err.println("result:" + result);
         return result;
+    }
+
+    public static String get(String url) throws Exception {
+        HttpGet httpGet = new HttpGet(url);
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpResponse response = client.execute(httpGet);
+        HttpEntity entity = response.getEntity();
+        String resBody = EntityUtils.toString(entity, "UTF-8");
+        return resBody;
     }
 }

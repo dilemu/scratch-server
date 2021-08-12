@@ -28,4 +28,11 @@ public interface IImageService {
      * @return
      */
     JsonResult<FeatureVO> convertStyle(byte[] image, String style);
+
+    /**
+     * 动漫人像
+     * @param image
+     * @return
+     */
+    JsonResult<FeatureVO> convertAnime(byte[] image);
 }

@@ -3,16 +3,16 @@ package com.example.server.controller;
 
 import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.UserRequest;
+import com.example.server.service.IUserService;
+import com.example.server.utils.HttpUtils;
+import com.example.server.utils.JsonUtils;
 import com.example.server.utils.StringUtils;
+import com.example.server.utils.UserContextUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <功能描述>
@@ -25,21 +25,42 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
 
-    @PostMapping ("/verify")
+    private final IUserService userService;
+
+    @Autowired
+    public UserController(IUserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/login")
     @ApiOperation(value = "用户登录校验")
-    private JsonResult<String> getToken(@RequestBody UserRequest requestVO) {
+    private JsonResult getToken(@RequestBody UserRequest requestVO) {
         if (StringUtils.isAnyEmpty(requestVO.getUserName(), requestVO.getPassword())) {
             return JsonResult.error("账号或密码为空");
         }
 
-        RestTemplate restTemplate = new RestTemplate();
-        Map<String, String> map = new HashMap<>();
-        map.put("usrname", requestVO.getUserName());
-        map.put("passwd", requestVO.getPassword());
-        HttpEntity requestBody = new HttpEntity(map);
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://8.133.177.11/login",requestBody, String.class);
-        return JsonResult.success(responseEntity.getBody());
+        return userService.login(requestVO);
     }
 
+    @GetMapping("/info")
+    @ApiOperation(value = "用户信息查询")
+    private JsonResult getUserInfo() throws Exception {
+        String token = UserContextUtils.getToken();
+        if (StringUtils.isEmpty(token)) {
+            return JsonResult.error("token为空");
+        }
 
+        return userService.getUserInfo(token);
+    }
+
+    @GetMapping("/times")
+    @ApiOperation(value = "用户次数验证")
+    private JsonResult getAITimes() throws Exception {
+        String token = UserContextUtils.getToken();
+        if (StringUtils.isEmpty(token)) {
+            return JsonResult.error("token为空");
+        }
+
+        return userService.verifyTimes(token);
+    }
 }

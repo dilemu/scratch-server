@@ -22,6 +22,7 @@ public class UserContextUtils {
     private static final String USER_ACCOUNT = "user-account";
     private static final String HPC_TOKEN = "Hpc-Token";
     private static final String ACCESS_TOKEN = "Access-Token";
+    private static final String TOKEN = "Token";
 
     public static String getUserAccount() {
         return getServletRequest().getHeader(USER_ACCOUNT);
@@ -33,6 +34,10 @@ public class UserContextUtils {
 
     public static String getAccessToken(){
         return getServletRequest().getHeader(ACCESS_TOKEN);
+    }
+
+    public static String getToken() {
+        return getServletRequest().getHeader(TOKEN);
     }
 
     public static HttpServletRequest getServletRequest() {

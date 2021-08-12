@@ -40,11 +40,22 @@ public class ImageServiceImpl implements IImageService {
     @Override
     public JsonResult<FeatureVO> convertStyle(byte[] image, String style) {
         AipImageProcess client = AIUtils.getImageProcessClient();
-        // 传入可选参数调用接口
         HashMap<String, String> options = new HashMap<String, String>();
         options.put("option", style);
         JSONObject res = client.styleTrans(image, options);
 
+        FeatureVO resultVO = new FeatureVO();
+        if (res.has("image"))
+            resultVO.setImage((String) res.get("image"));
+        resultVO.setLog_id((long) res.get("log_id"));
+        return JsonResult.success(resultVO);
+    }
+
+    @Override
+    public JsonResult<FeatureVO> convertAnime(byte[] image) {
+        AipImageProcess client = AIUtils.getImageProcessClient();
+        HashMap<String, String> options = new HashMap<>();
+        JSONObject res = client.selfieAnime(image, options);
         FeatureVO resultVO = new FeatureVO();
         if (res.has("image"))
             resultVO.setImage((String) res.get("image"));
