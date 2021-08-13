@@ -69,7 +69,7 @@ public class ImageController {
         return imageService.convertStyle(image, style);
     }
 
-    @PostMapping("/cartoon_portrait")
+    @PostMapping("/cartoon/portrait")
     @ApiOperation(value = "动漫人像")
     private JsonResult<FeatureVO> convertAnime(@RequestParam("file") MultipartFile file) throws Exception {
         Integer code = userService.verifyTimes(UserContextUtils.getToken()).getCode();

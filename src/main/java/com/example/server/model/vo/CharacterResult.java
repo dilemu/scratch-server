@@ -11,7 +11,7 @@ public class CharacterResult<T> {
     private String codes_result_num = "0";
     private String words_result_num = "0";
     private T words_result;
-    private T code_result;
+    private T codes_result;
 
     /**
      * 只为序列化，不能使用
@@ -20,13 +20,13 @@ public class CharacterResult<T> {
         super();
     }
 
-    private CharacterResult(String log_id, String codes_result_num, String words_result_num, T words_result, T code_result) {
+    private CharacterResult(String log_id, String codes_result_num, String words_result_num, T words_result, T codes_result) {
         super();
         this.log_id = log_id;
         this.codes_result_num = codes_result_num;
         this.words_result_num = words_result_num;
         this.words_result = words_result;
-        this.code_result = code_result;
+        this.codes_result = codes_result;
     }
 
     public static <T> CharacterResult<T> success(T result, T data) {
@@ -72,11 +72,11 @@ public class CharacterResult<T> {
         this.words_result = words_result;
     }
 
-    public T getCode_result() {
-        return code_result;
+    public T getCodes_result() {
+        return codes_result;
     }
 
-    public void setCode_result(T code_result) {
-        this.code_result = code_result;
+    public void setCodes_result(T codes_result) {
+        this.codes_result = codes_result;
     }
 }

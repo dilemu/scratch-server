@@ -1,7 +1,6 @@
 package com.example.server.model.vo;
 
 
-
 /**
  * <功能描述>
  *
@@ -15,6 +14,7 @@ public class UniversalRequest {
     private String detect_language = "false";
     private String detect_direction = "false";
     private String recognize_granularity = "false";
+    private String multi_detect = "false";
 
     public String getLanguage_type() {
         return language_type;
@@ -54,5 +54,13 @@ public class UniversalRequest {
 
     public void setRecognize_granularity(String recognize_granularity) {
         this.recognize_granularity = recognize_granularity;
+    }
+
+    public String getMulti_detect() {
+        return multi_detect;
+    }
+
+    public void setMulti_detect(String multi_detect) {
+        this.multi_detect = multi_detect;
     }
 }

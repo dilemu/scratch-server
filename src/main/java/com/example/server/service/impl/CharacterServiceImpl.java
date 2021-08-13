@@ -51,7 +51,7 @@ public class CharacterServiceImpl implements ICharacterService {
     public CharacterResult classifyQRCode(byte[] image) {
         HashMap<String, String> options = new HashMap<>();
 
-        JSONObject res = CLIENT.businessLicense(image, options);
+        JSONObject res = CLIENT.qrcode(image, options);
         String result = res.toString(2);
         return JsonUtils.jsonToObject(result, CharacterResult.class);
     }
