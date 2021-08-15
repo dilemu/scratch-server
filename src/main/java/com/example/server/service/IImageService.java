@@ -2,6 +2,7 @@ package com.example.server.service;
 
 
 import com.example.server.model.vo.FeatureVO;
+import com.example.server.model.vo.ImageResult;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.NormalImageVO;
 
@@ -35,4 +36,14 @@ public interface IImageService {
      * @return
      */
     JsonResult<FeatureVO> convertAnime(byte[] image);
+
+    JsonResult<ImageResult> classifyAnimal(byte[] image);
+
+    JsonResult<ImageResult> classifyPlant(byte[] image);
+
+    JsonResult<ImageResult> classifyIngredient(byte[] image);
+
+    JsonResult<ImageResult> classifyLandmark(byte[] image);
+
+    JsonResult<ImageResult> classifyCurrency(byte[] image);
 }

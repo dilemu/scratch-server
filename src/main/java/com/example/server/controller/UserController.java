@@ -3,6 +3,7 @@ package com.example.server.controller;
 
 import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.UserRequest;
+import com.example.server.model.vo.UserResult;
 import com.example.server.service.IUserService;
 import com.example.server.utils.HttpUtils;
 import com.example.server.utils.JsonUtils;
@@ -34,9 +35,9 @@ public class UserController {
 
     @PostMapping("/login")
     @ApiOperation(value = "用户登录校验")
-    private JsonResult getToken(@RequestBody UserRequest requestVO) {
+    private UserResult getToken(@RequestBody UserRequest requestVO) {
         if (StringUtils.isAnyEmpty(requestVO.getUserName(), requestVO.getPassword())) {
-            return JsonResult.error("账号或密码为空");
+            return UserResult.error("账号或密码为空");
         }
 
         return userService.login(requestVO);
@@ -44,10 +45,10 @@ public class UserController {
 
     @GetMapping("/info")
     @ApiOperation(value = "用户信息查询")
-    private JsonResult getUserInfo() throws Exception {
+    private UserResult getUserInfo() throws Exception {
         String token = UserContextUtils.getToken();
         if (StringUtils.isEmpty(token)) {
-            return JsonResult.error("token为空");
+            return UserResult.error("token为空");
         }
 
         return userService.getUserInfo(token);
@@ -55,10 +56,10 @@ public class UserController {
 
     @GetMapping("/times")
     @ApiOperation(value = "用户次数验证")
-    private JsonResult getAITimes() throws Exception {
+    private UserResult getAITimes() throws Exception {
         String token = UserContextUtils.getToken();
         if (StringUtils.isEmpty(token)) {
-            return JsonResult.error("token为空");
+            return UserResult.error("token为空");
         }
 
         return userService.verifyTimes(token);

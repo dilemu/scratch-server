@@ -1,15 +1,16 @@
 package com.example.server.service;
 
 import com.example.server.model.vo.CharacterResult;
+import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.UniversalRequest;
 
 public interface ICharacterService {
 
-    CharacterResult<Object> classifyLicensePlate(byte[] image, String multi_detect);
+    JsonResult<CharacterResult> classifyLicensePlate(byte[] image, String multi_detect);
 
-    CharacterResult classifyNormalCharacter(byte[] image, UniversalRequest universalRequest);
+    JsonResult<CharacterResult> classifyNormalCharacter(byte[] image, UniversalRequest universalRequest);
 
-    CharacterResult classifyQRCode(byte[] image);
+    JsonResult<CharacterResult> classifyQRCode(byte[] image);
 
-    CharacterResult classifyHandwritten(byte[] image, UniversalRequest universalRequest);
+    JsonResult<CharacterResult> classifyHandwritten(byte[] image, UniversalRequest universalRequest);
 }
