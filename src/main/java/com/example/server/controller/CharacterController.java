@@ -39,11 +39,10 @@ public class CharacterController {
     @ApiOperation(value = "通用文字识别")
     @PostMapping("/normal/classify")
     private JsonResult<CharacterResult> identifyNormalCharacter(@RequestParam("file") MultipartFile file, UniversalRequest universalRequest) throws Exception {
-        String code = userService.verifyTimes(UserContextUtils.getToken()).getCode();
-        if (code.equals("401") ) {
-            return JsonResult.error(Integer.valueOf(code),"账号余额不足");
-        } else if (code.equals("402") )  {
-            return JsonResult.error(Integer.valueOf(code), "token无效，请重新登录");
+        if (UserContextUtils.getMessage().equals("账号余额不足")) {
+            return JsonResult.error(401, "账号余额不足");
+        } else if (UserContextUtils.getMessage().equals("token无效，请重新登录")) {
+            return JsonResult.error(402, "token无效，请重新登录");
         }
 
         if (null == file) {
@@ -57,12 +56,11 @@ public class CharacterController {
     @ApiOperation(value = "车牌识别")
     @PostMapping("/license_plate/classify")
     private JsonResult<CharacterResult> identifyLicensePlate(@RequestParam("file") MultipartFile file, UniversalRequest universalRequest) throws Exception {
-//        String code = userService.verifyTimes(UserContextUtils.getToken()).getCode();
-//        if (code.equals("401") ) {
-//            return JsonResult.error(Integer.valueOf(code),"账号余额不足");
-//        } else if (code.equals("402") )  {
-//            return JsonResult.error(Integer.valueOf(code), "token无效，请重新登录");
-//        }
+        if (UserContextUtils.getMessage().equals("账号余额不足")) {
+            return JsonResult.error(401, "账号余额不足");
+        } else if (UserContextUtils.getMessage().equals("token无效，请重新登录")) {
+            return JsonResult.error(402, "token无效，请重新登录");
+        }
 
         if (null == file) {
             return JsonResult.error("文件不能为空");
@@ -75,12 +73,11 @@ public class CharacterController {
     @ApiOperation(value = "二维码识别")
     @PostMapping("/qr/classify")
     private JsonResult<CharacterResult> identifyQRCode(@RequestParam("file") MultipartFile file) throws Exception {
-//        String code = userService.verifyTimes(UserContextUtils.getToken()).getCode();
-//        if (code.equals("401") ) {
-//            return JsonResult.error(Integer.valueOf(code),"账号余额不足");
-//        } else if (code.equals("402") )  {
-//            return JsonResult.error(Integer.valueOf(code), "token无效，请重新登录");
-//        }
+        if (UserContextUtils.getMessage().equals("账号余额不足")) {
+            return JsonResult.error(401, "账号余额不足");
+        } else if (UserContextUtils.getMessage().equals("token无效，请重新登录")) {
+            return JsonResult.error(402, "token无效，请重新登录");
+        }
 
         if (null == file) {
             return JsonResult.error("文件不能为空");
@@ -92,12 +89,11 @@ public class CharacterController {
     @ApiOperation(value = "手写文字识别")
     @PostMapping("/handwritten/classify")
     private JsonResult<CharacterResult> identifyHandwritten(@RequestParam("file") MultipartFile file, UniversalRequest universalRequest) throws Exception {
-//        String code = userService.verifyTimes(UserContextUtils.getToken()).getCode();
-//        if (code.equals("401") ) {
-//            return JsonResult.error(Integer.valueOf(code),"账号余额不足");
-//        } else if (code.equals("402") )  {
-//            return JsonResult.error(Integer.valueOf(code), "token无效，请重新登录");
-//        }
+        if (UserContextUtils.getMessage().equals("账号余额不足")) {
+            return JsonResult.error(401, "账号余额不足");
+        } else if (UserContextUtils.getMessage().equals("token无效，请重新登录")) {
+            return JsonResult.error(402, "token无效，请重新登录");
+        }
 
         if (null == file) {
             return JsonResult.error("文件不能为空");

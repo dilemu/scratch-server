@@ -47,9 +47,14 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserResult verifyTimes(String token) throws Exception {
         String url = "http://8.133.177.11/ai_times/" + token;
-        Map<String, String> param = new HashMap<>();
         String result = HttpUtils.get(url);
+        UserResult user = JsonUtils.jsonToObject(result, UserResult.class);
+        if (user.getCode().equals("401")) {
+            return UserResult.error(user.getCode(),"账号余额不足");
+        } else if (user.getCode().equals("402")) {
+            return UserResult.error(user.getCode(),"token无效，请重新登录");
+        }
 
-        return JsonUtils.jsonToObject(result, UserResult.class);
+        return user;
     }
 }

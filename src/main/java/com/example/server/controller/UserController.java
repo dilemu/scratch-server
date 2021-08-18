@@ -46,7 +46,7 @@ public class UserController {
     @GetMapping("/info")
     @ApiOperation(value = "用户信息查询")
     private UserResult getUserInfo() throws Exception {
-        String token = UserContextUtils.getToken();
+        String token = UserContextUtils.getAccessToken();
         if (StringUtils.isEmpty(token)) {
             return UserResult.error("token为空");
         }
@@ -57,7 +57,7 @@ public class UserController {
     @GetMapping("/times")
     @ApiOperation(value = "用户次数验证")
     private UserResult getAITimes() throws Exception {
-        String token = UserContextUtils.getToken();
+        String token = UserContextUtils.getAccessToken();
         if (StringUtils.isEmpty(token)) {
             return UserResult.error("token为空");
         }

@@ -10,5 +10,4 @@ public interface IUserService {
 
     UserResult getUserInfo(String token) throws Exception;
 
-    UserResult verifyTimes(String token) throws Exception;
-}
+    UserResult verifyTimes(String token) throws Exception;}
