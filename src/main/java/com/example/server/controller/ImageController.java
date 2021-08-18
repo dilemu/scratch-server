@@ -1,9 +1,6 @@
 package com.example.server.controller;
 
-import com.example.server.model.vo.FeatureVO;
-import com.example.server.model.vo.ImageResult;
-import com.example.server.model.vo.JsonResult;
-import com.example.server.model.vo.NormalImageVO;
+import com.example.server.model.vo.*;
 import com.example.server.service.IImageService;
 import com.example.server.service.IUserService;
 import com.example.server.utils.UserContextUtils;
@@ -34,7 +31,7 @@ public class ImageController {
 
     @PostMapping("/general/classify")
     @ApiOperation(value = "通用物品识别")
-    private JsonResult<NormalImageVO> identifyGeneral(@RequestParam("file") MultipartFile file) throws Exception {
+    private JsonResult<ImageVO> identifyGeneral(@RequestParam("file") MultipartFile file) throws Exception {
         String status = UserContextUtils.getMessage();
         if(status.equals("账号余额不足")){
             return JsonResult.error(401, status);
@@ -51,7 +48,7 @@ public class ImageController {
 
     @PostMapping("/animal/classify")
     @ApiOperation(value = "动物识别")
-    private JsonResult<ImageResult> identifyAnimal(@RequestParam("file") MultipartFile file) throws Exception {
+    private JsonResult<ImageVO> identifyAnimal(@RequestParam("file") MultipartFile file) throws Exception {
         String status = UserContextUtils.getMessage();
         if(status.equals("账号余额不足")){
             return JsonResult.error(401, status);
@@ -69,7 +66,7 @@ public class ImageController {
 
     @PostMapping("/plant/classify")
     @ApiOperation(value = "植物识别")
-    private JsonResult<ImageResult> identifyPlant(@RequestParam("file") MultipartFile file) throws Exception {
+    private JsonResult<ImageVO> identifyPlant(@RequestParam("file") MultipartFile file) throws Exception {
         String status = UserContextUtils.getMessage();
         if(status.equals("账号余额不足")){
             return JsonResult.error(401, status);
@@ -87,7 +84,7 @@ public class ImageController {
 
     @PostMapping("/ingredient/classify")
     @ApiOperation(value = "果蔬识别")
-    private JsonResult<ImageResult> identifyIngredient(@RequestParam("file") MultipartFile file) throws Exception {
+    private JsonResult<ImageVO> identifyIngredient(@RequestParam("file") MultipartFile file) throws Exception {
         String status = UserContextUtils.getMessage();
         if(status.equals("账号余额不足")){
             return JsonResult.error(401, status);
@@ -105,7 +102,7 @@ public class ImageController {
 
     @PostMapping("/landmark/classify")
     @ApiOperation(value = "地标识别")
-    private JsonResult<ImageResult> identifyLandmark(@RequestParam("file") MultipartFile file) throws Exception {
+    private JsonResult identifyLandmark(@RequestParam("file") MultipartFile file) throws Exception {
         String status = UserContextUtils.getMessage();
         if(status.equals("账号余额不足")){
             return JsonResult.error(401, status);
@@ -123,7 +120,7 @@ public class ImageController {
 
     @PostMapping("/currency/classify")
     @ApiOperation(value = "货币识别")
-    private JsonResult<ImageResult> identifyCurrency(@RequestParam("file") MultipartFile file) throws Exception {
+    private JsonResult<CurrencyVO> identifyCurrency(@RequestParam("file") MultipartFile file) throws Exception {
         if(UserContextUtils.getMessage().equals("账号余额不足")){
             return JsonResult.error(401, "账号余额不足");
         }else if(UserContextUtils.getMessage().equals("token无效，请重新登录")){
