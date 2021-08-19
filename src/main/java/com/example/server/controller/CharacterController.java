@@ -28,12 +28,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class CharacterController {
 
     private final ICharacterService characterService;
-    private final IUserService userService;
 
     @Autowired
-    public CharacterController(ICharacterService characterService, IUserService userService) {
+    public CharacterController(ICharacterService characterService) {
         this.characterService = characterService;
-        this.userService = userService;
     }
 
     @ApiOperation(value = "通用文字识别")

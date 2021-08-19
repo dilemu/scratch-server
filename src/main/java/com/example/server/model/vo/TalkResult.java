@@ -1,15 +1,15 @@
 package com.example.server.model.vo;
 
 public class TalkResult<T> {
-    private String error_code;
+    private int error_code;
     private T result;
     private String error_msg;
 
-    public String getError_code() {
+    public int getError_code() {
         return error_code;
     }
 
-    public void setError_code(String error_code) {
+    public void setError_code(int error_code) {
         this.error_code = error_code;
     }
 

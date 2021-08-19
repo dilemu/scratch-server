@@ -1,15 +1,14 @@
 package com.example.server.model.vo;
 
-import java.util.List;
 
 public class ResponseVO<T> {
-        private int status;
-        private String msg;
-        private String origin;
-        private T schema;
-        private T actions;
-        private String raw_query;
-        private T slot_history;
+    private int status;
+    private String msg;
+    private String origin;
+    private T schema;
+    private T actions;
+    private String raw_query;
+    private T slot_history;
 
     public int getStatus() {
         return status;

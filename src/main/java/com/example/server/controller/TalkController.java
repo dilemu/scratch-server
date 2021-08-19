@@ -1,13 +1,16 @@
 package com.example.server.controller;
 
 import com.example.server.model.vo.*;
+import com.example.server.service.ITalkService;
 import com.example.server.utils.AuthUtils;
 import com.example.server.utils.HttpUtils;
 import com.example.server.utils.JsonUtils;
+import com.example.server.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,37 +31,26 @@ import java.util.Map;
 @RequestMapping("/talk")
 public class TalkController {
     private final static Logger LOGGER = LoggerFactory.getLogger(TalkController.class);
-    private static final String CLIENT_ID = "FUfaCuI9FdbnF9dvp31m9kHa";
-    private static final String CLIENT_SECRET = "FwbFqM9RrVhB7gIhxLaoVuWVdT4QlfEp";
-    private static final String SERVICE_ID = "S56735";
 
+    private final ITalkService talkService;
+
+    @Autowired
+    public TalkController(ITalkService talkService) {
+        this.talkService = talkService;
+    }
 
     @PostMapping("/classify")
     @ApiOperation(value = "智能对话")
-    private static JsonResult utterance(@RequestBody Request request) throws Exception {
-        // 请求URL
-        String talkUrl = "https://aip.baidubce.com/rpc/2.0/unit/service/v3/chat";
-        String log_id = String.valueOf((int)(Math.random()*10000000));
-        TalkRequest talkRequest = new TalkRequest();
-        talkRequest.setRequest(request);
-        talkRequest.setLog_id(log_id);
-        talkRequest.setService_id(SERVICE_ID);
-        talkRequest.setVersion("3.0");
-        talkRequest.setSession_id("");
+    private  JsonResult utterance(@RequestBody Request request) throws Exception {
+        if (StringUtils.isEmpty(request.getTerminal_id())) {
+            request.setTerminal_id("000");
+//            return JsonResult.error("Terminal_id can not be null");
+        }
 
-            // 请求参数
-            String params = JsonUtils.objectToJson(talkRequest);
-            String accessToken = AuthUtils.getAuth(CLIENT_ID,CLIENT_SECRET);
-            String result = HttpUtils.post(talkUrl, accessToken, "application/json", params);
-            TalkResult talkResult = JsonUtils.jsonToObject(result,TalkResult.class);
-            if(Integer.valueOf(talkResult.getError_msg())!=0){
-                return JsonResult.error(Integer.valueOf(talkResult.getError_msg()), talkResult.getError_msg());
-            }
+        if (StringUtils.isEmpty(request.getQuery())) {
+            return JsonResult.error("query can not be null");
+        }
 
-            Map resultMap = (Map) talkResult.getResult();
-            List<Object> s = (List<Object>) resultMap.get("responses");
-            List<Object> responses = (List<Object>) JsonUtils.jsonToObject(s.get(0).toString(), ResponseVO.class).getActions();
-
-            return JsonResult.success(responses.get(0));
+        return talkService.getResponse(request);
     }
 }
