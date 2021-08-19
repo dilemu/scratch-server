@@ -19,7 +19,7 @@ import java.io.IOException;
 /**
  * <功能描述>
  *
- * @author 20022436
+ * @author
  * @date 2021/8/19 13:34
  */
 @RestController
@@ -54,12 +54,12 @@ public class VoiceController {
 
     @PostMapping("/speech/synthesis")
     @ApiOperation(value = "语音合成")
-    private JsonResult syntheticSpeech(@RequestParam String str) throws IOException {
+    private byte[] syntheticSpeech(@RequestBody String str) throws IOException {
         String status = UserContextUtils.getMessage();
         if (status.equals("账号余额不足")) {
             throw new BizBaseException(401, status);
         } else if (status.equals("token无效，请重新登录")) {
-            return JsonResult.error(402, status);
+            throw new BizBaseException(402, status);
         }
 
         int maxLength = 1024;

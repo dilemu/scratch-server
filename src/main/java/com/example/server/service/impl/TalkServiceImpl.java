@@ -7,6 +7,7 @@ import com.example.server.utils.HttpUtils;
 import com.example.server.utils.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,12 +28,13 @@ public class TalkServiceImpl implements ITalkService {
 
     @Override
     public JsonResult getResponse(Request request) throws Exception {
-// 请求URL
+        // 请求URL
         String talkUrl = "https://aip.baidubce.com/rpc/2.0/unit/service/v3/chat";
         String log_id = String.valueOf((int) (Math.random() * 10000000));
         TalkRequest talkRequest = new TalkRequest();
         talkRequest.setRequest(request);
         talkRequest.setLog_id(log_id);
+
 
         // 请求参数
         String params = JsonUtils.objectToJson(talkRequest);
@@ -45,8 +47,8 @@ public class TalkServiceImpl implements ITalkService {
 
         Map resultMap = (Map) talkResult.getResult();
         List<Object> response = (List<Object>) resultMap.get("responses");
-        ResponseVO responseVO = JsonUtils.jsonToObject(response.get(0).toString(), ResponseVO.class);
+        Map responseVO = (Map) response.get(0);
 
-        return JsonResult.success(((List<Object>) responseVO.getActions()).get(0));
+        return JsonResult.success(responseVO.get("actions"));
     }
 }

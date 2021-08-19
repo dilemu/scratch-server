@@ -2,23 +2,12 @@ package com.example.server.model.vo;
 
 
 public class TalkRequest {
-    private static final String version = "3.0";
-    private static final String service_id = "S56735";
-    private static final String session_id = "";
+    private String version = "3.0";
+    private String service_id = "S56735";
+    private String session_id = "";
     private String log_id;
     private Request request;
 
-    public static String getVersion() {
-        return version;
-    }
-
-    public static String getService_id() {
-        return service_id;
-    }
-
-    public static String getSession_id() {
-        return session_id;
-    }
 
     public String getLog_id() {
         return log_id;
@@ -34,6 +23,30 @@ public class TalkRequest {
 
     public void setRequest(Request request) {
         this.request = request;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getService_id() {
+        return service_id;
+    }
+
+    public void setService_id(String service_id) {
+        this.service_id = service_id;
+    }
+
+    public String getSession_id() {
+        return session_id;
+    }
+
+    public void setSession_id(String session_id) {
+        this.session_id = session_id;
     }
 
     @Override

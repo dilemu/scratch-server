@@ -2,7 +2,7 @@ package com.example.server.model.vo;
 
 
 public class ResponseVO<T> {
-    private int status;
+    private double status;
     private String msg;
     private String origin;
     private T schema;
@@ -10,11 +10,11 @@ public class ResponseVO<T> {
     private String raw_query;
     private T slot_history;
 
-    public int getStatus() {
+    public double getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(double status) {
         this.status = status;
     }
 

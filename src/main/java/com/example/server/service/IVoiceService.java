@@ -7,5 +7,5 @@ import java.io.IOException;
 public interface IVoiceService {
     JsonResult classifyVoice(byte[] data, String format, int rate);
 
-    JsonResult syntheticSpeech(String str) throws IOException;
+    byte[] syntheticSpeech(String str) throws IOException;
 }
