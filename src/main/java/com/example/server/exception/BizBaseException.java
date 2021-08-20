@@ -1,5 +1,7 @@
 package com.example.server.exception;
 
+import com.example.server.model.vo.JsonResult;
+
 import java.text.MessageFormat;
 
 /**
@@ -63,7 +65,6 @@ public class BizBaseException extends RuntimeException {
     public BizBaseException(Integer code, String message, Throwable throwable) {
         this(code, message, throwable, new Object[0]);
     }
-
 
     public BizBaseException(Integer code, String message, Throwable throwable, Object... arguments) {
         super(message, throwable);

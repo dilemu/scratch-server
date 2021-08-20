@@ -2,6 +2,7 @@ package com.example.server.controller;
 
 import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.JsonResult;
+import com.example.server.model.vo.SynthesisRequest;
 import com.example.server.service.IVoiceService;
 import com.example.server.utils.StringUtils;
 import com.example.server.utils.UserContextUtils;
@@ -54,7 +55,7 @@ public class VoiceController {
 
     @PostMapping("/speech/synthesis")
     @ApiOperation(value = "语音合成")
-    private byte[] syntheticSpeech(@RequestBody String str) throws IOException {
+    private byte[] syntheticSpeech(@RequestBody SynthesisRequest synthesisRequest) throws IOException {
         String status = UserContextUtils.getMessage();
         if (status.equals("账号余额不足")) {
             throw new BizBaseException(401, status);
@@ -63,10 +64,10 @@ public class VoiceController {
         }
 
         int maxLength = 1024;
-        if (str.getBytes().length >= maxLength) {
+        if (synthesisRequest.getStr().getBytes().length >= maxLength) {
             throw new BizBaseException("文本长度过长");
         }
 
-        return voiceService.syntheticSpeech(str);
+        return voiceService.syntheticSpeech(synthesisRequest);
     }
 }

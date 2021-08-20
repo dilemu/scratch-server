@@ -4,8 +4,10 @@ import com.baidu.aip.speech.AipSpeech;
 import com.baidu.aip.speech.TtsResponse;
 import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.JsonResult;
+import com.example.server.model.vo.SynthesisRequest;
 import com.example.server.service.IVoiceService;
 import com.example.server.utils.AIUtils;
+import com.example.server.utils.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -29,7 +31,7 @@ public class VoiceServiceImpl implements IVoiceService {
     @Override
     public JsonResult classifyVoice(byte[] data, String format, int rate) {
         JSONObject voice = CLIENT.asr(data, format, rate, null);
-        if(voice.getInt("err_no") != 0){
+        if (voice.getInt("err_no") != 0) {
             return JsonResult.error(voice.getInt("err_no"), voice.getString("err_msg"));
         }
 
@@ -38,14 +40,16 @@ public class VoiceServiceImpl implements IVoiceService {
     }
 
     @Override
-    public byte[] syntheticSpeech(String str) throws IOException {
+    public byte[] syntheticSpeech(SynthesisRequest synthesisRequest) throws IOException {
         HashMap<String, Object> options = new HashMap<String, Object>();
-        options.put("spd", "5");
-        options.put("pit", "5");
-        options.put("per", "4");
-        TtsResponse res = CLIENT.synthesis(str, "zh", 1, options);
+        boolean c = StringUtils.isEmpty(synthesisRequest.getSpd());
+        options.put("spd", StringUtils.isEmpty(synthesisRequest.getSpd()) ? "5" : synthesisRequest.getSpd());
+        options.put("pit", StringUtils.isEmpty(synthesisRequest.getPit()) ? "5" : synthesisRequest.getPit());
+        options.put("per", StringUtils.isEmpty(synthesisRequest.getPer()) ? "4" : synthesisRequest.getPer());
+        options.put("vol", StringUtils.isEmpty(synthesisRequest.getVol()) ? "5" : synthesisRequest.getVol());
+        TtsResponse res = CLIENT.synthesis(synthesisRequest.getStr(), "zh", 1, options);
         JSONObject result = res.getResult();//服务器返回的内容，合成成功时为null,失败时包含error_no等信息
-        if(result != null){
+        if (result != null) {
             throw new BizBaseException(result.getInt("err_no"), result.getString("err_msg"));
         }
 
