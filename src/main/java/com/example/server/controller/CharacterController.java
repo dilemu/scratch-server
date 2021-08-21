@@ -1,11 +1,13 @@
 package com.example.server.controller;
 
 
+import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.CharacterResult;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.UniversalRequest;
 import com.example.server.service.ICharacterService;
 import com.example.server.service.IUserService;
+import com.example.server.utils.StringUtils;
 import com.example.server.utils.UserContextUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -43,8 +45,8 @@ public class CharacterController {
             return JsonResult.error(402, "token无效，请重新登录");
         }
 
-        if (null == file) {
-            return JsonResult.error("文件不能为空");
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException(401, "文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -60,8 +62,8 @@ public class CharacterController {
             return JsonResult.error(402, "token无效，请重新登录");
         }
 
-        if (null == file) {
-            return JsonResult.error("文件不能为空");
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException(401, "文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -77,9 +79,10 @@ public class CharacterController {
             return JsonResult.error(402, "token无效，请重新登录");
         }
 
-        if (null == file) {
-            return JsonResult.error("文件不能为空");
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException(401, "文件不能为空");
         }
+
         byte[] image = file.getBytes();
         return characterService.classifyQRCode(image);
     }
@@ -93,8 +96,8 @@ public class CharacterController {
             return JsonResult.error(402, "token无效，请重新登录");
         }
 
-        if (null == file) {
-            return JsonResult.error("文件不能为空");
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException(401, "文件不能为空");
         }
 
         byte[] image = file.getBytes();

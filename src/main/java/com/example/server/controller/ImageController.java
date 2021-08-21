@@ -1,8 +1,10 @@
 package com.example.server.controller;
 
+import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.*;
 import com.example.server.service.IImageService;
 import com.example.server.service.IUserService;
+import com.example.server.utils.StringUtils;
 import com.example.server.utils.UserContextUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,8 +40,8 @@ public class ImageController {
         }else if(status.equals("token无效，请重新登录")){
             return JsonResult.error(402, status);
         }
-        if (null == file) {
-            return JsonResult.error("文件不能为空");
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException(401, "文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -56,8 +58,8 @@ public class ImageController {
             return JsonResult.error(402, status);
         }
 
-        if (null == file) {
-            return JsonResult.error("文件不能为空");
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException(401, "文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -74,8 +76,8 @@ public class ImageController {
             return JsonResult.error(402, status);
         }
 
-        if (null == file) {
-            return JsonResult.error("文件不能为空");
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException(401, "文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -92,8 +94,8 @@ public class ImageController {
             return JsonResult.error(402, status);
         }
 
-        if (null == file) {
-            return JsonResult.error("文件不能为空");
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException(401, "文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -110,8 +112,8 @@ public class ImageController {
             return JsonResult.error(402, status);
         }
 
-        if (null == file) {
-            return JsonResult.error("文件不能为空");
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException(401, "文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -127,8 +129,8 @@ public class ImageController {
             return JsonResult.error(402, "token无效，请重新登录");
         }
 
-        if (null == file) {
-            return JsonResult.error("文件不能为空");
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException(401, "文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -145,8 +147,8 @@ public class ImageController {
             return JsonResult.error(402, status);
         }
 
-        if (null == file) {
-            return JsonResult.error("文件不能为空");
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException(401, "文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -163,8 +165,8 @@ public class ImageController {
             return JsonResult.error(402, status);
         }
 
-        if (null == file) {
-            return JsonResult.error("文件不能为空");
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException(401, "文件不能为空");
         }
 
         byte[] image = file.getBytes();

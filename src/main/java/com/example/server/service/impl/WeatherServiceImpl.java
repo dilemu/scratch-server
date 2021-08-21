@@ -44,7 +44,7 @@ public class WeatherServiceImpl implements IWeatherService {
     @Override
     public JsonResult getCurrentWeather(WeatherRequest weatherRequest) throws Exception {
         String locationId = this.getLocationId(weatherRequest.getLocation());
-        String url = "https://devapi.qweather.com/v7/weather/now?" + "location=" + locationId + "&key=" + key;
+        String url = "https://devapi.qweather.com/v7/weather/now?" + "location=" + locationId + "&key=" + key+"&unit="+weatherRequest.getUnit();
         String result = HttpUtils.get(url);
         NowDTO nowDTO = JsonUtils.jsonToObject(result, NowDTO.class);
 
@@ -71,6 +71,7 @@ public class WeatherServiceImpl implements IWeatherService {
         CityDTO cityDTO = JsonUtils.jsonToObject(result, CityDTO.class);
         if(Integer.valueOf(cityDTO.getCode()) != 200){
         }
+
         ArrayList cityList = (ArrayList) cityDTO.getLocation();
         Map cityMap = (Map) cityList.get(0);
         return cityMap.get("id").toString();

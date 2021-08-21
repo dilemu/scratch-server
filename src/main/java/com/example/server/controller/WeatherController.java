@@ -63,4 +63,14 @@ public class WeatherController {
 
         return weatherService.getAirQuality(weatherRequest);
     }
+
+//    @PostMapping("/city")
+//    @ApiOperation("城市信息")
+//    private JsonResult getAirQuality(@RequestBody WeatherRequest weatherRequest) throws Exception {
+//        if(StringUtils.isEmpty(weatherRequest.getLocation())){
+//            throw new BizBaseException("城市不可为空");
+//        }
+//
+//        return weatherService.getAirQuality(weatherRequest);
+//    }
 }

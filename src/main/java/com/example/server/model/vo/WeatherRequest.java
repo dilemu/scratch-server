@@ -9,7 +9,8 @@ package com.example.server.model.vo;
 public class WeatherRequest {
     private String location;
 
-    private long key;
+    private String unit;
+
 
     public String getLocation() {
         return location;
@@ -19,11 +20,11 @@ public class WeatherRequest {
         this.location = location;
     }
 
-    public long getKey() {
-        return key;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setKey(long key) {
-        this.key = key;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

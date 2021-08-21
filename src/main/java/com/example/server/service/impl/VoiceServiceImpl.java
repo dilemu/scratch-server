@@ -42,7 +42,7 @@ public class VoiceServiceImpl implements IVoiceService {
     @Override
     public byte[] syntheticSpeech(SynthesisRequest synthesisRequest) throws IOException {
         HashMap<String, Object> options = new HashMap<String, Object>();
-        boolean c = StringUtils.isEmpty(synthesisRequest.getSpd());
+        options.put("aue", 6);
         options.put("spd", StringUtils.isEmpty(synthesisRequest.getSpd()) ? "5" : synthesisRequest.getSpd());
         options.put("pit", StringUtils.isEmpty(synthesisRequest.getPit()) ? "5" : synthesisRequest.getPit());
         options.put("per", StringUtils.isEmpty(synthesisRequest.getPer()) ? "4" : synthesisRequest.getPer());

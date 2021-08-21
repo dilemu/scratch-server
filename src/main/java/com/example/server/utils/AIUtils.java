@@ -1,5 +1,7 @@
 package com.example.server.utils;
 
+import com.baidu.aip.bodyanalysis.AipBodyAnalysis;
+import com.baidu.aip.face.AipFace;
 import com.baidu.aip.imageclassify.AipImageClassify;
 import com.baidu.aip.imageprocess.AipImageProcess;
 import com.baidu.aip.ocr.AipOcr;
@@ -30,6 +32,16 @@ public class AIUtils {
 
     public static AipSpeech getVoiceClient(){
         AipSpeech client = new AipSpeech("24592949", "6k74vEiLkxwoMe1ADP3349LK", "k62Wogyca04KnE6oNagLHnUQcaRjjUNE");
+        return client;
+    }
+
+    public static AipBodyAnalysis getBodyClient(){
+        AipBodyAnalysis client = new AipBodyAnalysis("24733252", "q6kapec9QTelblQykYi0n4TF", "dKklLEudzcLIeIPkT8IQyy10S9FRfw0W");
+        return client;
+    }
+
+    public static AipFace getFaceClient(){
+        AipFace client = new AipFace("24733412", "bp5XQtzPwzGC7OmbLgqg0HZh", "lGD8SH8VZGx27yOLoeCTudZP04U0teMh");
         return client;
     }
 }
