@@ -27,6 +27,8 @@ public class FaceServiceImpl implements IFaceService {
         // 人脸检测
         AipFace client = AIUtils.getFaceClient();
         JSONObject res = client.detect(image, imageType, options);
+        if (res.has("error_code"))
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
         JSONObject result = (JSONObject) res.get("result");
         Object object = result.getJSONArray("face_list").toList().get(0);
         Map objectMap = (Map) object;

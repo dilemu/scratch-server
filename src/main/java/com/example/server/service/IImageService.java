@@ -37,15 +37,46 @@ public interface IImageService {
      */
     JsonResult<FeatureVO> convertAnime(byte[] image);
 
+    /**
+     * 动物识别
+     *
+     * @param
+     * @return
+     */
     JsonResult<ImageVO> classifyAnimal(byte[] image);
 
+    /**
+     * 植物识别
+     * @param image
+     * @return
+     */
     JsonResult<ImageVO> classifyPlant(byte[] image);
 
+    /**
+     * 果蔬识别
+     * @param image
+     * @return
+     */
     JsonResult<ImageVO> classifyIngredient(byte[] image);
 
+    /**
+     * 地标识别
+     * @param image
+     * @return
+     */
     JsonResult classifyLandmark(byte[] image);
 
+    /**
+     * 货币识别
+     * @param image
+     * @return
+     */
     JsonResult<CurrencyVO> classifyCurrency(byte[] image);
 
+    /**
+     * logo识别
+     * @param image
+     * @return
+     */
     JsonResult classifyLogo(byte[] image);
 }

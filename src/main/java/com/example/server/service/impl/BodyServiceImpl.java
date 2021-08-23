@@ -22,7 +22,7 @@ public class BodyServiceImpl implements IBodyService {
 
         JSONObject res = client.bodyAnalysis(image, options);
         if (res.has("error_code"))
-            return JsonResult.error(-1, res.getString("error_msg"));
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("person_info").toList().get(0);
         Map result = (Map) object;
@@ -36,7 +36,7 @@ public class BodyServiceImpl implements IBodyService {
 
         JSONObject res = client.bodyAttr(image, options);
         if (res.has("error_code"))
-            return JsonResult.error(-1, res.getString("error_msg"));
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
 
         Object result = res.getJSONArray("person_info").toList().get(0);
         Map resultMap = (Map) result;
@@ -49,7 +49,7 @@ public class BodyServiceImpl implements IBodyService {
 
         JSONObject res = client.bodyNum(image, options);
         if (res.has("error_code"))
-            return JsonResult.error(-1, res.getString("error_msg"));
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
         return JsonResult.success(res.get("person_num"));
     }
 
@@ -59,7 +59,7 @@ public class BodyServiceImpl implements IBodyService {
 
         JSONObject res = client.gesture(image, options);
         if (res.has("error_code"))
-            return JsonResult.error(-1, res.getString("error_msg"));
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("result").toList().get(0);
         Map resultMap = (Map) object;

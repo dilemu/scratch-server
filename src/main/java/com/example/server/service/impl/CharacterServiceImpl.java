@@ -38,7 +38,7 @@ public class CharacterServiceImpl implements ICharacterService {
         JSONObject res = CLIENT.plateLicense(image, options);
         CharacterResult result = JsonUtils.jsonToObject(res.toString(2), CharacterResult.class);
         if (StringUtils.isNotEmpty(result.getError_code()))
-            return JsonResult.error(-1, result.getError_msg());
+            return JsonResult.error(Integer.valueOf(result.getError_code()), result.getError_msg());
         Map resultMap = (Map) result.getWords_result();
         List<Object> probability = (List<Object>) resultMap.get("probability");
 
@@ -60,9 +60,8 @@ public class CharacterServiceImpl implements ICharacterService {
         JSONObject res = CLIENT.basicGeneral(image, options);
         CharacterResult result = JsonUtils.jsonToObject(res.toString(2), CharacterResult.class);
         if (StringUtils.isNotEmpty(result.getError_code()))
-            return JsonResult.error(-1, result.getError_msg());
+            return JsonResult.error(Integer.valueOf(result.getError_code()), result.getError_msg());
 
-        JSONArray result1 = res.getJSONArray("words_result");
         return JsonResult.success(result.getWords_result());
     }
 
@@ -73,7 +72,7 @@ public class CharacterServiceImpl implements ICharacterService {
         JSONObject res = CLIENT.qrcode(image, options);
         CharacterResult result = JsonUtils.jsonToObject(res.toString(2), CharacterResult.class);
         if (StringUtils.isNotEmpty(result.getError_code()))
-            return JsonResult.error(-1, result.getError_msg());
+            return JsonResult.error(Integer.valueOf(result.getError_code()), result.getError_msg());
         return JsonResult.success(result.getCodes_result());
     }
 
@@ -87,7 +86,7 @@ public class CharacterServiceImpl implements ICharacterService {
         JSONObject res = CLIENT.basicGeneral(image, options);
         CharacterResult result = JsonUtils.jsonToObject(res.toString(2), CharacterResult.class);
         if (StringUtils.isNotEmpty(result.getError_code()))
-            return JsonResult.error(-1, result.getError_msg());
+            return JsonResult.error(Integer.valueOf(result.getError_code()), result.getError_msg());
         return JsonResult.success(result.getWords_result());
     }
 }

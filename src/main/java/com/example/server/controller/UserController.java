@@ -1,6 +1,7 @@
 package com.example.server.controller;
 
 
+import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.UserRequest;
 import com.example.server.model.vo.UserResult;
@@ -37,7 +38,7 @@ public class UserController {
     @ApiOperation(value = "用户登录校验")
     private UserResult getToken(@RequestBody UserRequest requestVO) {
         if (StringUtils.isAnyEmpty(requestVO.getUserName(), requestVO.getPassword())) {
-            return UserResult.error("账号或密码为空");
+            throw new BizBaseException("账号或密码为空");
         }
 
         return userService.login(requestVO);
@@ -48,7 +49,7 @@ public class UserController {
     private UserResult getUserInfo() throws Exception {
         String token = UserContextUtils.getAccessToken();
         if (StringUtils.isEmpty(token)) {
-            return UserResult.error("token为空");
+            throw new BizBaseException("token为空");
         }
 
         return userService.getUserInfo(token);
@@ -59,7 +60,7 @@ public class UserController {
     private UserResult getAITimes() throws Exception {
         String token = UserContextUtils.getAccessToken();
         if (StringUtils.isEmpty(token)) {
-            return UserResult.error("token为空");
+            throw new BizBaseException("token为空");
         }
 
         return userService.verifyTimes(token);

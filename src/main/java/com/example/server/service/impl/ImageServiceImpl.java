@@ -33,7 +33,7 @@ public class ImageServiceImpl implements IImageService {
         HashMap<String, String> options = new HashMap<String, String>();
         JSONObject res = CLIENT.advancedGeneral(image, options);
         if (res.has("error_code"))
-            return JsonResult.error(-1, res.getString("error_msg"));
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("result").toList().get(0);
         ImageVO resultVO = new ImageVO();
@@ -48,7 +48,7 @@ public class ImageServiceImpl implements IImageService {
         HashMap<String, String> options = new HashMap<String, String>();
         JSONObject res = CLIENT.animalDetect(image, options);
         if (res.has("error_code"))
-            return JsonResult.error(-1, res.getString("error_msg"));
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("result").toList().get(0);
         ImageVO resultVO = new ImageVO();
@@ -63,7 +63,7 @@ public class ImageServiceImpl implements IImageService {
         HashMap<String, String> options = new HashMap<String, String>();
         JSONObject res = CLIENT.plantDetect(image, options);
         if (res.has("error_code"))
-            return JsonResult.error(-1, res.getString("error_msg"));
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("result").toList().get(0);
         ImageVO resultVO = new ImageVO();
@@ -78,7 +78,7 @@ public class ImageServiceImpl implements IImageService {
         HashMap<String, String> options = new HashMap<String, String>();
         JSONObject res = CLIENT.ingredient(image, options);
         if (res.has("error_code"))
-            return JsonResult.error(-1, res.getString("error_msg"));
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("result").toList().get(0);
         ImageVO resultVO = new ImageVO();
@@ -93,7 +93,7 @@ public class ImageServiceImpl implements IImageService {
         HashMap<String, String> options = new HashMap<String, String>();
         JSONObject res = CLIENT.landmark(image, options);
         if (res.has("error_code"))
-            return JsonResult.error(-1, res.getString("error_msg"));
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
 
         String result = res.get("result").toString();
         return JsonResult.success(JsonUtils.jsonToObject(result, Landmark.class));
@@ -104,7 +104,7 @@ public class ImageServiceImpl implements IImageService {
         HashMap<String, String> options = new HashMap<String, String>();
         JSONObject res = CLIENT.currency(image, options);
         if (res.has("error_code"))
-            return JsonResult.error(-1, res.getString("error_msg"));
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
 
         String result = res.get("result").toString();
         return JsonResult.success(JsonUtils.jsonToObject(result, CurrencyVO.class));
@@ -115,7 +115,7 @@ public class ImageServiceImpl implements IImageService {
         HashMap<String, String> options = new HashMap<String, String>();
         JSONObject res = CLIENT.logoSearch(image, options);
         if (res.has("error_code"))
-            return JsonResult.error(-1, res.getString("error_msg"));
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("result").toList().get(0);
         Map resultMap = (Map) object;
@@ -133,7 +133,7 @@ public class ImageServiceImpl implements IImageService {
         options.put("option", style);
         JSONObject res = client.styleTrans(image, options);
         if (res.has("error_code"))
-            return JsonResult.error(-1, res.getString("error_msg"));
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
 
         FeatureVO resultVO = new FeatureVO();
         if (res.has("image"))
@@ -148,7 +148,7 @@ public class ImageServiceImpl implements IImageService {
         HashMap<String, String> options = new HashMap<>();
         JSONObject res = client.selfieAnime(image, options);
         if (res.has("error_code"))
-            return JsonResult.error(-1, res.getString("error_msg"));
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
         FeatureVO resultVO = new FeatureVO();
         if (res.has("image"))
             resultVO.setImage((String) res.get("image"));

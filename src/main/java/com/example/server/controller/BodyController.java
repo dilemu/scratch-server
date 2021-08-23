@@ -29,7 +29,7 @@ public class BodyController {
     @ApiOperation("人体关键点")
     private JsonResult getKeysOfBody(@RequestParam("file") MultipartFile file) throws IOException {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
+            throw new BizBaseException("文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -40,7 +40,7 @@ public class BodyController {
     @ApiOperation("人体特征")
     private JsonResult getCharacteristicsOfBody(@RequestParam("file") MultipartFile file, String type) throws IOException {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
+            throw new BizBaseException("文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -51,7 +51,7 @@ public class BodyController {
     @ApiOperation("人流量")
     private JsonResult getNumbersOfBody(@RequestParam("file") MultipartFile file) throws IOException {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
+            throw new BizBaseException("文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -62,7 +62,7 @@ public class BodyController {
     @ApiOperation("手势识别")
     private JsonResult classifyGesture(@RequestParam("file") MultipartFile file) throws IOException {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
+            throw new BizBaseException("文件不能为空");
         }
 
         byte[] image = file.getBytes();

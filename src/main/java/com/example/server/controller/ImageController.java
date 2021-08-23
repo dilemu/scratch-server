@@ -35,7 +35,7 @@ public class ImageController {
     @ApiOperation(value = "通用物品识别")
     private JsonResult<ImageVO> identifyGeneral(@RequestParam("file") MultipartFile file) throws Exception {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
+            throw new BizBaseException("文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -46,7 +46,7 @@ public class ImageController {
     @ApiOperation(value = "动物识别")
     private JsonResult<ImageVO> identifyAnimal(@RequestParam("file") MultipartFile file) throws Exception {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
+            throw new BizBaseException("文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -57,7 +57,7 @@ public class ImageController {
     @ApiOperation(value = "植物识别")
     private JsonResult<ImageVO> identifyPlant(@RequestParam("file") MultipartFile file) throws Exception {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
+            throw new BizBaseException("文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -68,7 +68,7 @@ public class ImageController {
     @ApiOperation(value = "果蔬识别")
     private JsonResult<ImageVO> identifyIngredient(@RequestParam("file") MultipartFile file) throws Exception {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
+            throw new BizBaseException("文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -79,7 +79,7 @@ public class ImageController {
     @ApiOperation(value = "地标识别")
     private JsonResult identifyLandmark(@RequestParam("file") MultipartFile file) throws Exception {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
+            throw new BizBaseException("文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -90,7 +90,7 @@ public class ImageController {
     @ApiOperation(value = "货币识别")
     private JsonResult<CurrencyVO> identifyCurrency(@RequestParam("file") MultipartFile file) throws Exception {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
+            throw new BizBaseException("文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -101,7 +101,7 @@ public class ImageController {
     @ApiOperation(value = "logo识别")
     private JsonResult identifyLogo(@RequestParam("file") MultipartFile file) throws Exception {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
+            throw new BizBaseException("文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -112,7 +112,7 @@ public class ImageController {
     @ApiOperation(value = "图像风格转换")
     private JsonResult<FeatureVO> convertStyle(@RequestParam("file") MultipartFile file, @RequestParam("style") String style) throws Exception {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
+            throw new BizBaseException("文件不能为空");
         }
 
         byte[] image = file.getBytes();
@@ -123,7 +123,7 @@ public class ImageController {
     @ApiOperation(value = "动漫人像")
     private JsonResult<FeatureVO> convertAnime(@RequestParam("file") MultipartFile file) throws Exception {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
+            throw new BizBaseException("文件不能为空");
         }
 
         byte[] image = file.getBytes();

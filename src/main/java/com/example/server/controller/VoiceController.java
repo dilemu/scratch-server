@@ -40,7 +40,7 @@ public class VoiceController {
     @ApiOperation(value = "语音识别")
     private JsonResult identifyVoice(@RequestParam("file") MultipartFile file, String format, int rate) throws IOException {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
+            throw new BizBaseException("文件不能为空");
         }
 
         byte[] data = file.getBytes();
