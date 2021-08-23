@@ -6,11 +6,11 @@ import com.example.server.model.vo.UniversalRequest;
 
 public interface ICharacterService {
 
-    JsonResult<CharacterResult> classifyLicensePlate(byte[] image, String multi_detect);
+    JsonResult classifyLicensePlate(byte[] image, String multi_detect);
 
-//    JsonResult<CharacterResult> classifyNormalCharacter(byte[] image, UniversalRequest universalRequest);
+    JsonResult classifyNormalCharacter(byte[] image, UniversalRequest universalRequest);
 
-    JsonResult<CharacterResult> classifyQRCode(byte[] image);
+    JsonResult classifyQRCode(byte[] image);
 
-    JsonResult<CharacterResult> classifyHandwritten(byte[] image, UniversalRequest universalRequest);
+    JsonResult classifyHandwritten(byte[] image, UniversalRequest universalRequest);
 }
