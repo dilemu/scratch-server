@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -33,24 +34,26 @@ public class CharacterServiceImpl implements ICharacterService {
 
         JSONObject res = CLIENT.plateLicense(image, options);
         CharacterResult result = JsonUtils.jsonToObject(res.toString(2), CharacterResult.class);
-        if(StringUtils.isNotEmpty(result.getError_code()))
+        if (StringUtils.isNotEmpty(result.getError_code()))
             return JsonResult.error(-1, result.getError_msg());
         return JsonResult.success(result);
     }
 
-    @Override
-    public JsonResult<CharacterResult> classifyNormalCharacter(byte[] image, UniversalRequest universalRequest) {
-        HashMap<String, String> options = new HashMap<String, String>();
-        options.put("language_type", universalRequest.getLanguage_type());
-        options.put("detect_direction", universalRequest.getDetect_direction());
-        options.put("detect_language", universalRequest.getDetect_language());
-        options.put("probability", universalRequest.getProbability());
-
-        JSONObject res = CLIENT.basicGeneral(image, options);
-        CharacterResult result = JsonUtils.jsonToObject(res.toString(2), CharacterResult.class);
-        if(StringUtils.isNotEmpty(result.getError_code()))
-            return JsonResult.error(-1, result.getError_msg());
-        return JsonResult.success(result);    }
+//    @Override
+//    public JsonResult<CharacterResult> classifyNormalCharacter(byte[] image, UniversalRequest universalRequest) {
+//        HashMap<String, String> options = new HashMap<String, String>();
+//        options.put("language_type", universalRequest.getLanguage_type());
+//        options.put("detect_direction", universalRequest.getDetect_direction());
+//        options.put("detect_language", universalRequest.getDetect_language());
+//        options.put("probability", universalRequest.getProbability());
+//
+//        JSONObject res = CLIENT.basicGeneral(image, options);
+//        CharacterResult result = JsonUtils.jsonToObject(res.toString(2), CharacterResult.class);
+//        if (StringUtils.isNotEmpty(result.getError_code()))
+//            return JsonResult.error(-1, result.getError_msg());
+//        Map resultMap = (Map) res.get("result");
+//        return JsonResult.success(res);
+//    }
 
     @Override
     public JsonResult<CharacterResult> classifyQRCode(byte[] image) {
@@ -58,7 +61,7 @@ public class CharacterServiceImpl implements ICharacterService {
 
         JSONObject res = CLIENT.qrcode(image, options);
         CharacterResult result = JsonUtils.jsonToObject(res.toString(2), CharacterResult.class);
-        if(StringUtils.isNotEmpty(result.getError_code()))
+        if (StringUtils.isNotEmpty(result.getError_code()))
             return JsonResult.error(-1, result.getError_msg());
         return JsonResult.success(result);
     }
@@ -72,7 +75,7 @@ public class CharacterServiceImpl implements ICharacterService {
 
         JSONObject res = CLIENT.basicGeneral(image, options);
         CharacterResult result = JsonUtils.jsonToObject(res.toString(2), CharacterResult.class);
-        if(StringUtils.isNotEmpty(result.getError_code()))
+        if (StringUtils.isNotEmpty(result.getError_code()))
             return JsonResult.error(-1, result.getError_msg());
         return JsonResult.success(result);
     }

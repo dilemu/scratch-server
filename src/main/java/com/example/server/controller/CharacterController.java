@@ -36,32 +36,20 @@ public class CharacterController {
         this.characterService = characterService;
     }
 
-    @ApiOperation(value = "通用文字识别")
-    @PostMapping("/normal/classify")
-    private JsonResult<CharacterResult> identifyNormalCharacter(@RequestParam("file") MultipartFile file, UniversalRequest universalRequest) throws Exception {
-        if (UserContextUtils.getMessage().equals("账号余额不足")) {
-            return JsonResult.error(401, "账号余额不足");
-        } else if (UserContextUtils.getMessage().equals("token无效，请重新登录")) {
-            return JsonResult.error(402, "token无效，请重新登录");
-        }
-
-        if (StringUtils.isBlank(file.getOriginalFilename())) {
-            throw new BizBaseException(401, "文件不能为空");
-        }
-
-        byte[] image = file.getBytes();
-        return characterService.classifyNormalCharacter(image, universalRequest);
-    }
+//    @ApiOperation(value = "通用文字识别")
+//    @PostMapping("/normal/classify")
+//    private JsonResult<CharacterResult> identifyNormalCharacter(@RequestParam("file") MultipartFile file, UniversalRequest universalRequest) throws Exception {
+//        if (StringUtils.isBlank(file.getOriginalFilename())) {
+//            throw new BizBaseException(401, "文件不能为空");
+//        }
+//
+//        byte[] image = file.getBytes();
+//        return characterService.classifyNormalCharacter(image, universalRequest);
+//    }
 
     @ApiOperation(value = "车牌识别")
     @PostMapping("/license_plate/classify")
     private JsonResult<CharacterResult> identifyLicensePlate(@RequestParam("file") MultipartFile file, UniversalRequest universalRequest) throws Exception {
-        if (UserContextUtils.getMessage().equals("账号余额不足")) {
-            return JsonResult.error(401, "账号余额不足");
-        } else if (UserContextUtils.getMessage().equals("token无效，请重新登录")) {
-            return JsonResult.error(402, "token无效，请重新登录");
-        }
-
         if (StringUtils.isBlank(file.getOriginalFilename())) {
             throw new BizBaseException(401, "文件不能为空");
         }
@@ -73,12 +61,6 @@ public class CharacterController {
     @ApiOperation(value = "二维码识别")
     @PostMapping("/qr/classify")
     private JsonResult<CharacterResult> identifyQRCode(@RequestParam("file") MultipartFile file) throws Exception {
-        if (UserContextUtils.getMessage().equals("账号余额不足")) {
-            return JsonResult.error(401, "账号余额不足");
-        } else if (UserContextUtils.getMessage().equals("token无效，请重新登录")) {
-            return JsonResult.error(402, "token无效，请重新登录");
-        }
-
         if (StringUtils.isBlank(file.getOriginalFilename())) {
             throw new BizBaseException(401, "文件不能为空");
         }
@@ -90,12 +72,6 @@ public class CharacterController {
     @ApiOperation(value = "手写文字识别")
     @PostMapping("/handwritten/classify")
     private JsonResult<CharacterResult> identifyHandwritten(@RequestParam("file") MultipartFile file, UniversalRequest universalRequest) throws Exception {
-        if (UserContextUtils.getMessage().equals("账号余额不足")) {
-            return JsonResult.error(401, "账号余额不足");
-        } else if (UserContextUtils.getMessage().equals("token无效，请重新登录")) {
-            return JsonResult.error(402, "token无效，请重新登录");
-        }
-
         if (StringUtils.isBlank(file.getOriginalFilename())) {
             throw new BizBaseException(401, "文件不能为空");
         }

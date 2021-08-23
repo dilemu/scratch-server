@@ -1,9 +1,23 @@
-apollo:
-  bootstrap:
-    enabled: true
-    eagerLoad:
-      enabled: true
-    namespaces: permission.yaml
-  meta: http://apollo-configservice.paas-pro.haier.net
-app:
-  id: S02022
+server:
+  port: 60002
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: server
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+  resources:
+    static-locations: classpath:/templates/
+mybatis-plus:
+  mapper-locations: classpath*:com/haier/**/dao/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    object-wrapper-factory: com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory
+    call-setters-on-nulls: true
+
+# swagger配置
+swagger:
+  enabled: true

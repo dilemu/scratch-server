@@ -1,4 +1,3 @@
-
 server:
   port: 60002
   servlet:
@@ -12,39 +11,6 @@ spring:
       max-request-size: 500MB
   resources:
     static-locations: classpath:/templates/
-  cloud:
-    nacos:
-      discovery:
-        server-addr: https://nacos.haier.net
-        group: HPRMC-DEV-TEST
-  datasource:
-    username:
-    password:
-    url: jdbc:mysql://10.250.2.24:3306/permission?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      connection-timeout: 30000
-      idle-timeout: 600000
-      max-lifetime: 1800000
-      maximum-pool-size: 100
-      minimum-idle: 10
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-    time-zone: GMT+8
-  mail:
-    default-encoding: utf-8
-    host: smtp.qq.com
-    password: glecaoecduzbbgfb
-    username: 1116309@qq.com
-    properties:
-      mail:
-        smtp:
-          auth: false
-          starttls:
-            enable: false
-            required: false
-  cache:
-    cache-names: permission
 mybatis-plus:
   mapper-locations: classpath*:com/haier/**/dao/*.xml
   configuration:
@@ -52,53 +18,8 @@ mybatis-plus:
     object-wrapper-factory: com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory
     call-setters-on-nulls: true
 
-rocketmq:
-  acl:
-    accessKey: hprmcRocketMQ
-    accessSecret: 12345678
-  consumer:
-    groupName: hprmc-translate-permission-topic-test-consumer
-    namesrvAddr: 10.250.36.5:9879;10.250.36.6:9879;10.250.36.7:9879;
-    topics: hprmc-translate-permission-topic-test
-    tags: S02022
-    consumeThreadMin: 1
-    consumeThreadMax: 1
-    consumeMessageBatchMaxSize: 1
-
-graph:
-  restServerUrl: http://10.250.2.22:8080
-  graphName: hugegraphdev
-  username:
-  password:
 # swagger配置
 swagger:
   enabled: true
-system:
-  code: S02022
-  name: 权限中心
 
-elasticsearch:
-  ip: es-k8s.paas-test.haier.net
-  port: 80
-FastJsonAutoDiscoverable:
-  autoDiscover: false;
-# xxl job配置
-xxl:
-  job:
-    accessToken: ''
-    admin:
-      addresses: http://hpc-schdule-test.paas-sit.haier.net/xxl-job-admin
-    executor:
-      address:
-      appname: hprmc-permission-dev
-      ip:
-      logretentiondays: 30
-      port: 12001
-      logpath: /data/applogs/xxl-job/jobhandler
-
-DLM:
-  url:
-    login: http://8.133.177.11/login
-    info: http://8.133.177.11/userinfo
-    times: http://8.133.177.11/ai_times
 

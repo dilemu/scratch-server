@@ -43,7 +43,7 @@ public class EventPoolConfig {
     private static final String LOG_THREAD_NAME_PREFIX = "logExecutor-";
 
     @Bean("eventExecutor")
-    public Executor eventExecutor(){
+    public Executor eventExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(CORE_POOL_SIZE);
         executor.setMaxPoolSize(MAX_POOL_SIZE);
@@ -55,7 +55,7 @@ public class EventPoolConfig {
     }
 
     @Bean("logExecutor")
-    public Executor logExecutor(){
+    public Executor logExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(CPU_CORE_NUM * 2);
         executor.setMaxPoolSize(CPU_CORE_NUM * 3);

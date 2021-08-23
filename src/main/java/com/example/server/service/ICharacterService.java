@@ -8,7 +8,7 @@ public interface ICharacterService {
 
     JsonResult<CharacterResult> classifyLicensePlate(byte[] image, String multi_detect);
 
-    JsonResult<CharacterResult> classifyNormalCharacter(byte[] image, UniversalRequest universalRequest);
+//    JsonResult<CharacterResult> classifyNormalCharacter(byte[] image, UniversalRequest universalRequest);
 
     JsonResult<CharacterResult> classifyQRCode(byte[] image);
 

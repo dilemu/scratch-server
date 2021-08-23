@@ -39,7 +39,7 @@ public class ImageResult<T> {
     }
 
     public static <T> ImageResult<T> success(T data) {
-        return new ImageResult<>("","", data, "");
+        return new ImageResult<>("", "", data, "");
     }
 
     public ImageResult(String message) {

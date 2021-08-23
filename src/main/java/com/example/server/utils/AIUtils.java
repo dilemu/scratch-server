@@ -15,32 +15,32 @@ import com.baidu.aip.speech.AipSpeech;
  */
 public class AIUtils {
 
-    public static AipImageClassify getImageClient(){
+    public static AipImageClassify getImageClient() {
         AipImageClassify client = new AipImageClassify("24667544", "Ewv3X3GTIG3FMUAv8c0En1Za", "SMldQouVe1Z5iO03Ezo7TZPE9EdyvAS4");
         return client;
     }
 
-    public static AipImageProcess getImageProcessClient(){
+    public static AipImageProcess getImageProcessClient() {
         AipImageProcess client = new AipImageProcess("24680995", "KbSfM3HcTAAVZDqWI2zBU7jh", "2GwSwIPfrcw3pRGReNVIr9UuvMGGl4UG");
         return client;
     }
 
-    public static AipOcr getOcrClient(){
+    public static AipOcr getOcrClient() {
         AipOcr client = new AipOcr("24689350", "aAeFDFH8dkMYfGrHjdWVbxbE", "8tA3XoRA4DwUWzldEFHPsbwpSkNOZZWe");
         return client;
     }
 
-    public static AipSpeech getVoiceClient(){
+    public static AipSpeech getVoiceClient() {
         AipSpeech client = new AipSpeech("24592949", "6k74vEiLkxwoMe1ADP3349LK", "k62Wogyca04KnE6oNagLHnUQcaRjjUNE");
         return client;
     }
 
-    public static AipBodyAnalysis getBodyClient(){
+    public static AipBodyAnalysis getBodyClient() {
         AipBodyAnalysis client = new AipBodyAnalysis("24733252", "q6kapec9QTelblQykYi0n4TF", "dKklLEudzcLIeIPkT8IQyy10S9FRfw0W");
         return client;
     }
 
-    public static AipFace getFaceClient(){
+    public static AipFace getFaceClient() {
         AipFace client = new AipFace("24733412", "bp5XQtzPwzGC7OmbLgqg0HZh", "lGD8SH8VZGx27yOLoeCTudZP04U0teMh");
         return client;
     }

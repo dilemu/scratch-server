@@ -8,7 +8,6 @@ import com.example.server.service.IBodyService;
 import com.example.server.utils.AIUtils;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
-import springfox.documentation.spring.web.json.Json;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,6 @@
 package com.example.server.controller;
 
 import com.example.server.exception.BizBaseException;
-import com.example.server.model.vo.CharacterRequest;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.service.IBodyService;
 import com.example.server.utils.StringUtils;

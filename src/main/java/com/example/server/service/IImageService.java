@@ -14,6 +14,7 @@ public interface IImageService {
 
     /**
      * 通用识别
+     *
      * @param filepath
      * @return
      */
@@ -21,6 +22,7 @@ public interface IImageService {
 
     /**
      * 图像风格转换
+     *
      * @param image
      * @param style
      * @return
@@ -29,6 +31,7 @@ public interface IImageService {
 
     /**
      * 动漫人像
+     *
      * @param image
      * @return
      */
@@ -43,4 +46,6 @@ public interface IImageService {
     JsonResult classifyLandmark(byte[] image);
 
     JsonResult<CurrencyVO> classifyCurrency(byte[] image);
+
+    JsonResult classifyLogo(byte[] image);
 }

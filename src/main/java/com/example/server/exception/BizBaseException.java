@@ -6,8 +6,9 @@ import java.text.MessageFormat;
 
 /**
  * <功能描述>
- *
+ * <p>
  * 基础异常类
+ *
  * @author
  * @date 2021/7/8 16:58
  */

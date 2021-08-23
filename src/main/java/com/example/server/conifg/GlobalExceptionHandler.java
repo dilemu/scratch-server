@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public JsonResult<Boolean> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        return  JsonResult.error(e.getBindingResult().getFieldError().getDefaultMessage());
+        return JsonResult.error(e.getBindingResult().getFieldError().getDefaultMessage());
     }
 
     @ExceptionHandler(RuntimeException.class)
     public JsonResult<Boolean> handleRuntimeException(RuntimeException e) {
-        return  JsonResult.error(e.getMessage());
+        return JsonResult.error(e.getMessage());
     }
 }

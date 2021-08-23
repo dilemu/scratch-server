@@ -50,9 +50,9 @@ public class UserServiceImpl implements IUserService {
         String result = HttpUtils.get(url);
         UserResult user = JsonUtils.jsonToObject(result, UserResult.class);
         if (user.getCode().equals("401")) {
-            return UserResult.error(user.getCode(),"账号余额不足");
+            return UserResult.error(user.getCode(), "账号余额不足");
         } else if (user.getCode().equals("402")) {
-            return UserResult.error(user.getCode(),"token无效，请重新登录");
+            return UserResult.error(user.getCode(), "token无效，请重新登录");
         }
 
         return user;

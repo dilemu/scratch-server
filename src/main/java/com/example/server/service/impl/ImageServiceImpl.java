@@ -3,12 +3,14 @@ package com.example.server.service.impl;
 import com.baidu.aip.imageclassify.AipImageClassify;
 import com.baidu.aip.imageprocess.AipImageProcess;
 import com.baidu.aip.ocr.AipOcr;
+import com.example.server.model.eum.Gesture;
 import com.example.server.model.vo.*;
 import com.example.server.service.IImageService;
 import com.example.server.utils.AIUtils;
 import com.example.server.utils.JsonUtils;
 import com.example.server.utils.SpringUtils;
 import com.example.server.utils.StringUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -106,6 +108,22 @@ public class ImageServiceImpl implements IImageService {
 
         String result = res.get("result").toString();
         return JsonResult.success(JsonUtils.jsonToObject(result, CurrencyVO.class));
+    }
+
+    @Override
+    public JsonResult classifyLogo(byte[] image) {
+        HashMap<String, String> options = new HashMap<String, String>();
+        JSONObject res = CLIENT.logoSearch(image, options);
+        if (res.has("error_code"))
+            return JsonResult.error(-1, res.getString("error_msg"));
+
+        Object object = res.getJSONArray("result").toList().get(0);
+        Map resultMap = (Map) object;
+        ImageVO imageVO = new ImageVO();
+
+        imageVO.setName(resultMap.get("name").toString());
+        imageVO.setScore((Double) resultMap.get("probability"));
+        return JsonResult.success(imageVO);
     }
 
     @Override

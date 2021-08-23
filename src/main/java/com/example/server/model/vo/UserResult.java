@@ -22,7 +22,7 @@ public class UserResult<T> {
      * @param msg
      * @param data
      */
-    private UserResult(String code, T data , String msg) {
+    private UserResult(String code, T data, String msg) {
         super();
         this.code = code;
         this.data = data;

@@ -36,15 +36,13 @@ public class WeatherServiceImpl implements IWeatherService {
         String result = HttpUtils.get(url);
         DailyDTO dailyDTO = JsonUtils.jsonToObject(result, DailyDTO.class);
         ArrayList weatherList = (ArrayList) dailyDTO.getDaily();
-//        DailyResult dailyResult = new DailyResult();
-//        BeanConvertUtils.copyProperties(weatherList.get(0), dailyResult.getClass());
         return JsonResult.success(weatherList.get(0));
     }
 
     @Override
     public JsonResult getCurrentWeather(WeatherRequest weatherRequest) throws Exception {
         String locationId = this.getLocationId(weatherRequest.getLocation());
-        String url = "https://devapi.qweather.com/v7/weather/now?" + "location=" + locationId + "&key=" + key+"&unit="+weatherRequest.getUnit();
+        String url = "https://devapi.qweather.com/v7/weather/now?" + "location=" + locationId + "&key=" + key + "&unit=" + weatherRequest.getUnit();
         String result = HttpUtils.get(url);
         NowDTO nowDTO = JsonUtils.jsonToObject(result, NowDTO.class);
 
@@ -69,7 +67,7 @@ public class WeatherServiceImpl implements IWeatherService {
         String cityUrl = "https://geoapi.qweather.com/v2/city/lookup?" + "location=" + location + "&key=" + key;
         String result = HttpUtils.get(cityUrl);
         CityDTO cityDTO = JsonUtils.jsonToObject(result, CityDTO.class);
-        if(Integer.valueOf(cityDTO.getCode()) != 200){
+        if (Integer.valueOf(cityDTO.getCode()) != 200) {
         }
 
         ArrayList cityList = (ArrayList) cityDTO.getLocation();

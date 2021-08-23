@@ -32,7 +32,7 @@ public class CacheConfig {
     private static final int MAX_CAPACITY = 1000;
 
     @Bean(name = "caffine")
-    public CacheManager caffeineCacheManager(){
+    public CacheManager caffeineCacheManager() {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager();
         Caffeine<Object, Object> caffine = Caffeine.newBuilder()
                 .initialCapacity(INITIAL_CAPACITY)

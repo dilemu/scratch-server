@@ -6,7 +6,7 @@ public enum Gesture {
     Thumb_up("点赞", 9), Thumb_down("Diss", 10), ILY("Rock", 11), Palm_up("掌心向上", 12),
     Heart_1("双手比心1", 13), Heart_2("双手比心2", 14), Heart_3("双手比心3", 15), Two("数字2", 16),
     Three("数字3", 17), Four("数字4", 18), Six("数字6", 19), Seven("数字7", 20),
-    Eight("数字8", 21), Nine("数字9", 22), Rock("Rock", 23), Insult	("竖中指", 24);
+    Eight("数字8", 21), Nine("数字9", 22), Rock("Rock", 23), Insult("竖中指", 24);
 
     private String name;
     private int index;

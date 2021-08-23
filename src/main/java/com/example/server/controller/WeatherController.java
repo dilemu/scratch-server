@@ -37,7 +37,7 @@ public class WeatherController {
     @PostMapping("/day")
     @ApiOperation("逐天气候")
     private JsonResult getWeatherOfDays(@RequestBody WeatherRequest weatherRequest) throws Exception {
-        if(StringUtils.isEmpty(weatherRequest.getLocation())){
+        if (StringUtils.isEmpty(weatherRequest.getLocation())) {
             throw new BizBaseException("城市不可为空");
         }
 
@@ -47,7 +47,7 @@ public class WeatherController {
     @PostMapping("/now")
     @ApiOperation("实时气候")
     private JsonResult getCurrentWeather(@RequestBody WeatherRequest weatherRequest) throws Exception {
-        if(StringUtils.isEmpty(weatherRequest.getLocation())){
+        if (StringUtils.isEmpty(weatherRequest.getLocation())) {
             throw new BizBaseException("城市不可为空");
         }
 
@@ -57,20 +57,10 @@ public class WeatherController {
     @PostMapping("/air")
     @ApiOperation("空气质量")
     private JsonResult getAirQuality(@RequestBody WeatherRequest weatherRequest) throws Exception {
-        if(StringUtils.isEmpty(weatherRequest.getLocation())){
+        if (StringUtils.isEmpty(weatherRequest.getLocation())) {
             throw new BizBaseException("城市不可为空");
         }
 
         return weatherService.getAirQuality(weatherRequest);
     }
-
-//    @PostMapping("/city")
-//    @ApiOperation("城市信息")
-//    private JsonResult getAirQuality(@RequestBody WeatherRequest weatherRequest) throws Exception {
-//        if(StringUtils.isEmpty(weatherRequest.getLocation())){
-//            throw new BizBaseException("城市不可为空");
-//        }
-//
-//        return weatherService.getAirQuality(weatherRequest);
-//    }
 }

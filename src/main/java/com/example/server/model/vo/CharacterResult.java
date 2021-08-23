@@ -41,16 +41,15 @@ public class CharacterResult<T> {
     }
 
     public static <T> CharacterResult<T> success(T result, T data) {
-        return new CharacterResult<>("", "", "", result, data,"","");
+        return new CharacterResult<>("", "", "", result, data, "", "");
     }
-
 
 
     /**
      * 仅指定message时使用
      */
-    public static <T> CharacterResult<T> error(String code,String message) {
-        return new CharacterResult<>(code,message);
+    public static <T> CharacterResult<T> error(String code, String message) {
+        return new CharacterResult<>(code, message);
     }
 
     public String getLog_id() {

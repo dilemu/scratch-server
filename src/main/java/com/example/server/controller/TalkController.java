@@ -35,7 +35,7 @@ public class TalkController {
 
     @PostMapping("/classify")
     @ApiOperation(value = "智能对话")
-    private  JsonResult utterance(@RequestBody Request request) throws Exception {
+    private JsonResult utterance(@RequestBody Request request) throws Exception {
         if (StringUtils.isEmpty(request.getTerminal_id())) {
             request.setTerminal_id("000");
 //            return JsonResult.error("Terminal_id can not be null");

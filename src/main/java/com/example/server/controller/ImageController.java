@@ -34,12 +34,6 @@ public class ImageController {
     @PostMapping("/general/classify")
     @ApiOperation(value = "通用物品识别")
     private JsonResult<ImageVO> identifyGeneral(@RequestParam("file") MultipartFile file) throws Exception {
-        String status = UserContextUtils.getMessage();
-        if(status.equals("账号余额不足")){
-            return JsonResult.error(401, status);
-        }else if(status.equals("token无效，请重新登录")){
-            return JsonResult.error(402, status);
-        }
         if (StringUtils.isBlank(file.getOriginalFilename())) {
             throw new BizBaseException(401, "文件不能为空");
         }
@@ -51,13 +45,6 @@ public class ImageController {
     @PostMapping("/animal/classify")
     @ApiOperation(value = "动物识别")
     private JsonResult<ImageVO> identifyAnimal(@RequestParam("file") MultipartFile file) throws Exception {
-        String status = UserContextUtils.getMessage();
-        if(status.equals("账号余额不足")){
-            return JsonResult.error(401, status);
-        }else if(status.equals("token无效，请重新登录")){
-            return JsonResult.error(402, status);
-        }
-
         if (StringUtils.isBlank(file.getOriginalFilename())) {
             throw new BizBaseException(401, "文件不能为空");
         }
@@ -69,13 +56,6 @@ public class ImageController {
     @PostMapping("/plant/classify")
     @ApiOperation(value = "植物识别")
     private JsonResult<ImageVO> identifyPlant(@RequestParam("file") MultipartFile file) throws Exception {
-        String status = UserContextUtils.getMessage();
-        if(status.equals("账号余额不足")){
-            return JsonResult.error(401, status);
-        }else if(status.equals("token无效，请重新登录")){
-            return JsonResult.error(402, status);
-        }
-
         if (StringUtils.isBlank(file.getOriginalFilename())) {
             throw new BizBaseException(401, "文件不能为空");
         }
@@ -87,13 +67,6 @@ public class ImageController {
     @PostMapping("/ingredient/classify")
     @ApiOperation(value = "果蔬识别")
     private JsonResult<ImageVO> identifyIngredient(@RequestParam("file") MultipartFile file) throws Exception {
-        String status = UserContextUtils.getMessage();
-        if(status.equals("账号余额不足")){
-            return JsonResult.error(401, status);
-        }else if(status.equals("token无效，请重新登录")){
-            return JsonResult.error(402, status);
-        }
-
         if (StringUtils.isBlank(file.getOriginalFilename())) {
             throw new BizBaseException(401, "文件不能为空");
         }
@@ -105,13 +78,6 @@ public class ImageController {
     @PostMapping("/landmark/classify")
     @ApiOperation(value = "地标识别")
     private JsonResult identifyLandmark(@RequestParam("file") MultipartFile file) throws Exception {
-        String status = UserContextUtils.getMessage();
-        if(status.equals("账号余额不足")){
-            return JsonResult.error(401, status);
-        }else if(status.equals("token无效，请重新登录")){
-            return JsonResult.error(402, status);
-        }
-
         if (StringUtils.isBlank(file.getOriginalFilename())) {
             throw new BizBaseException(401, "文件不能为空");
         }
@@ -123,12 +89,6 @@ public class ImageController {
     @PostMapping("/currency/classify")
     @ApiOperation(value = "货币识别")
     private JsonResult<CurrencyVO> identifyCurrency(@RequestParam("file") MultipartFile file) throws Exception {
-        if(UserContextUtils.getMessage().equals("账号余额不足")){
-            return JsonResult.error(401, "账号余额不足");
-        }else if(UserContextUtils.getMessage().equals("token无效，请重新登录")){
-            return JsonResult.error(402, "token无效，请重新登录");
-        }
-
         if (StringUtils.isBlank(file.getOriginalFilename())) {
             throw new BizBaseException(401, "文件不能为空");
         }
@@ -137,16 +97,20 @@ public class ImageController {
         return imageService.classifyCurrency(image);
     }
 
+    @PostMapping("/logo/classify")
+    @ApiOperation(value = "logo识别")
+    private JsonResult identifyLogo(@RequestParam("file") MultipartFile file) throws Exception {
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException(401, "文件不能为空");
+        }
+
+        byte[] image = file.getBytes();
+        return imageService.classifyLogo(image);
+    }
+
     @PostMapping("/style/convert")
     @ApiOperation(value = "图像风格转换")
     private JsonResult<FeatureVO> convertStyle(@RequestParam("file") MultipartFile file, @RequestParam("style") String style) throws Exception {
-        String status = UserContextUtils.getMessage();
-        if(status.equals("账号余额不足")){
-            return JsonResult.error(401, status);
-        }else if(status.equals("token无效，请重新登录")){
-            return JsonResult.error(402, status);
-        }
-
         if (StringUtils.isBlank(file.getOriginalFilename())) {
             throw new BizBaseException(401, "文件不能为空");
         }
@@ -158,13 +122,6 @@ public class ImageController {
     @PostMapping("/cartoon/portrait")
     @ApiOperation(value = "动漫人像")
     private JsonResult<FeatureVO> convertAnime(@RequestParam("file") MultipartFile file) throws Exception {
-        String status = UserContextUtils.getMessage();
-        if(status.equals("账号余额不足")){
-            return JsonResult.error(401, status);
-        }else if(status.equals("token无效，请重新登录")){
-            return JsonResult.error(402, status);
-        }
-
         if (StringUtils.isBlank(file.getOriginalFilename())) {
             throw new BizBaseException(401, "文件不能为空");
         }

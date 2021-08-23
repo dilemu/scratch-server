@@ -39,12 +39,6 @@ public class VoiceController {
     @PostMapping("/classify")
     @ApiOperation(value = "语音识别")
     private JsonResult identifyVoice(@RequestParam("file") MultipartFile file, String format, int rate) throws IOException {
-        String status = UserContextUtils.getMessage();
-        if (status.equals("账号余额不足")) {
-            throw new BizBaseException(401, status);
-        } else if (status.equals("token无效，请重新登录")) {
-            return JsonResult.error(402, status);
-        }
         if (StringUtils.isBlank(file.getOriginalFilename())) {
             throw new BizBaseException(401, "文件不能为空");
         }
@@ -53,17 +47,10 @@ public class VoiceController {
         return voiceService.classifyVoice(data, format, rate);
     }
 
-    @RequestMapping(value = { "/speech/synthesis" }, method = { RequestMethod.POST }, produces="audio/wav")
+    @RequestMapping(value = {"/speech/synthesis"}, method = {RequestMethod.POST}, produces = "audio/wav")
 //    @PostMapping("/speech/synthesis")
     @ApiOperation(value = "语音合成")
     private byte[] syntheticSpeech(@RequestBody SynthesisRequest synthesisRequest) throws IOException {
-        String status = UserContextUtils.getMessage();
-        if (status.equals("账号余额不足")) {
-            throw new BizBaseException(401, status);
-        } else if (status.equals("token无效，请重新登录")) {
-            throw new BizBaseException(402, status);
-        }
-
         int maxLength = 1024;
         if (synthesisRequest.getStr().length() >= maxLength) {
             throw new BizBaseException("文本长度过长");
