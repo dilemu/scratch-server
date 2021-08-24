@@ -79,4 +79,11 @@ public interface IImageService {
      * @return
      */
     JsonResult classifyLogo(byte[] image);
+
+    /**
+     * 菜品识别
+     * @param image
+     * @return
+     */
+    JsonResult classifyDish(byte[] image);
 }

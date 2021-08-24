@@ -127,6 +127,22 @@ public class ImageServiceImpl implements IImageService {
     }
 
     @Override
+    public JsonResult classifyDish(byte[] image) {
+        HashMap<String, String> options = new HashMap<String, String>();
+        JSONObject res = CLIENT.dishDetect(image, options);
+        if (res.has("error_code"))
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+
+        Object object = res.getJSONArray("result").toList().get(0);
+        Map resultMap = (Map) object;
+        ImageVO imageVO = new ImageVO();
+
+        imageVO.setName(resultMap.get("name").toString());
+        imageVO.setScore(Double.parseDouble(resultMap.get("probability").toString()));
+        return JsonResult.success(imageVO);
+    }
+
+    @Override
     public JsonResult<FeatureVO> convertStyle(byte[] image, String style) {
         AipImageProcess client = AIUtils.getImageProcessClient();
         HashMap<String, String> options = new HashMap<String, String>();

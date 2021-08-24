@@ -108,6 +108,17 @@ public class ImageController {
         return imageService.classifyLogo(image);
     }
 
+    @PostMapping("/dish/classify")
+    @ApiOperation(value = "菜品识别")
+    private JsonResult identifyDish(@RequestParam("file") MultipartFile file) throws Exception {
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException("文件不能为空");
+        }
+
+        byte[] image = file.getBytes();
+        return imageService.classifyDish(image);
+    }
+
     @PostMapping("/style/convert")
     @ApiOperation(value = "图像风格转换")
     private JsonResult<FeatureVO> convertStyle(@RequestParam("file") MultipartFile file, @RequestParam("style") String style) throws Exception {
