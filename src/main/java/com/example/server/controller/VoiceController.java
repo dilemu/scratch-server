@@ -38,20 +38,22 @@ public class VoiceController {
 
     @PostMapping("/classify")
     @ApiOperation(value = "语音识别")
-    private JsonResult identifyVoice(@RequestParam("file") MultipartFile file, String format, int rate) throws IOException {
+    private JsonResult identifyVoice(@RequestParam("file") MultipartFile file, String format, int rate, int dev_pid) throws IOException {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
             throw new BizBaseException("文件不能为空");
         }
 
         byte[] data = file.getBytes();
-        return voiceService.classifyVoice(data, format, rate);
+        return voiceService.classifyVoice(data, format, rate, dev_pid);
     }
 
     @RequestMapping(value = {"/speech/synthesis"}, method = {RequestMethod.POST}, produces = "audio/wav")
-//    @PostMapping("/speech/synthesis")
     @ApiOperation(value = "语音合成")
     private byte[] syntheticSpeech(@RequestBody SynthesisRequest synthesisRequest) throws IOException {
-        int maxLength = 1024;
+        if (synthesisRequest.getStr().length() < 0){
+            throw new BizBaseException("文本不可为空");
+        }
+            int maxLength = 1024;
         if (synthesisRequest.getStr().length() >= maxLength) {
             throw new BizBaseException("文本长度过长");
         }

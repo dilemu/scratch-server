@@ -21,23 +21,6 @@ public interface IImageService {
     public JsonResult<ImageVO> classifyGeneralImage(byte[] filepath);
 
     /**
-     * 图像风格转换
-     *
-     * @param image
-     * @param style
-     * @return
-     */
-    JsonResult<FeatureVO> convertStyle(byte[] image, String style);
-
-    /**
-     * 动漫人像
-     *
-     * @param image
-     * @return
-     */
-    JsonResult<FeatureVO> convertAnime(byte[] image);
-
-    /**
      * 动物识别
      *
      * @param
@@ -86,4 +69,35 @@ public interface IImageService {
      * @return
      */
     JsonResult classifyDish(byte[] image);
+
+    /**
+     * 图像风格转换
+     *
+     * @param image
+     * @param style
+     * @return
+     */
+    JsonResult<FeatureVO> convertStyle(byte[] image, String style);
+
+    /**
+     * 动漫人像
+     *
+     * @param image
+     * @return
+     */
+    JsonResult<FeatureVO> convertAnime(byte[] image);
+
+    /**
+     * 背景替换
+     * @param image
+     * @return
+     */
+    JsonResult<FeatureVO> replaceBackground(byte[] image);
+
+    /**
+     * 图像优化
+     * @param image
+     * @return
+     */
+    JsonResult<FeatureVO> optimizeImage(byte[] image);
 }

@@ -29,8 +29,10 @@ public class VoiceServiceImpl implements IVoiceService {
     private static AipSpeech CLIENT = AIUtils.getVoiceClient();
 
     @Override
-    public JsonResult classifyVoice(byte[] data, String format, int rate) {
-        JSONObject voice = CLIENT.asr(data, format, rate, null);
+    public JsonResult classifyVoice(byte[] data, String format, int rate, int dev_pid) {
+        HashMap<String, Object> options = new HashMap<String, Object>();
+        options.put("dev_pid",dev_pid);
+        JSONObject voice = CLIENT.asr(data, format, rate, options);
         if (voice.getInt("err_no") != 0) {
             return JsonResult.error(voice.getInt("err_no"), voice.getString("err_msg"));
         }
@@ -42,7 +44,7 @@ public class VoiceServiceImpl implements IVoiceService {
     @Override
     public byte[] syntheticSpeech(SynthesisRequest synthesisRequest) throws IOException {
         HashMap<String, Object> options = new HashMap<String, Object>();
-        options.put("aue", 6);
+        options.put("aue", StringUtils.isEmpty(synthesisRequest.getAue()) ? "6" : synthesisRequest.getAue());
         options.put("spd", StringUtils.isEmpty(synthesisRequest.getSpd()) ? "5" : synthesisRequest.getSpd());
         options.put("pit", StringUtils.isEmpty(synthesisRequest.getPit()) ? "5" : synthesisRequest.getPit());
         options.put("per", StringUtils.isEmpty(synthesisRequest.getPer()) ? "4" : synthesisRequest.getPer());

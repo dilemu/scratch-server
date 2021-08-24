@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SpringBootApplication
-//@ServletComponentScan
 public class DemoApplication {
 
     public static void main(String[] args) {

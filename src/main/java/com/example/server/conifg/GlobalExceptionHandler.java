@@ -1,9 +1,12 @@
 package com.example.server.conifg;
 
+import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.JsonResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.Map;
 
 /**
  * @author
@@ -17,8 +20,8 @@ public class GlobalExceptionHandler {
         return JsonResult.error(e.getBindingResult().getFieldError().getDefaultMessage());
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public JsonResult<Boolean> handleRuntimeException(RuntimeException e) {
-        return JsonResult.error(e.getMessage());
+    @ExceptionHandler(BizBaseException.class)
+    public JsonResult<Boolean> handleRuntimeException(BizBaseException e) {
+        return JsonResult.error(e.getCode(),e.getMessage());
     }
 }

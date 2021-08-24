@@ -27,6 +27,7 @@ import java.util.Map;
 public class ImageServiceImpl implements IImageService {
 
     private static AipImageClassify CLIENT = AIUtils.getImageClient();
+    private static AipImageProcess client = AIUtils.getImageProcessClient();
 
     @Override
     public JsonResult<ImageVO> classifyGeneralImage(byte[] image) {
@@ -144,7 +145,6 @@ public class ImageServiceImpl implements IImageService {
 
     @Override
     public JsonResult<FeatureVO> convertStyle(byte[] image, String style) {
-        AipImageProcess client = AIUtils.getImageProcessClient();
         HashMap<String, String> options = new HashMap<String, String>();
         options.put("option", style);
         JSONObject res = client.styleTrans(image, options);
@@ -160,9 +160,34 @@ public class ImageServiceImpl implements IImageService {
 
     @Override
     public JsonResult<FeatureVO> convertAnime(byte[] image) {
-        AipImageProcess client = AIUtils.getImageProcessClient();
         HashMap<String, String> options = new HashMap<>();
         JSONObject res = client.selfieAnime(image, options);
+        if (res.has("error_code"))
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+        FeatureVO resultVO = new FeatureVO();
+        if (res.has("image"))
+            resultVO.setImage((String) res.get("image"));
+        resultVO.setLog_id((long) res.get("log_id"));
+        return JsonResult.success(resultVO);
+    }
+
+    @Override
+    public JsonResult<FeatureVO> replaceBackground(byte[] image) {
+        HashMap<String, String> options = new HashMap<>();
+        JSONObject res = client.skySeg(image, options);
+        if (res.has("error_code"))
+            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+        FeatureVO resultVO = new FeatureVO();
+        if (res.has("image"))
+            resultVO.setImage((String) res.get("image"));
+        resultVO.setLog_id((long) res.get("log_id"));
+        return JsonResult.success(resultVO);
+    }
+
+    @Override
+    public JsonResult<FeatureVO> optimizeImage(byte[] image) {
+        HashMap<String, String> options = new HashMap<>();
+        JSONObject res = client.imageDefinitionEnhance(image, options);
         if (res.has("error_code"))
             return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
         FeatureVO resultVO = new FeatureVO();

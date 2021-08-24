@@ -13,6 +13,7 @@ public class SynthesisRequest {
     private String pit;
     private String vol;
     private String per;
+    private String aue;
 
     public String getStr() {
         return str;
@@ -52,5 +53,13 @@ public class SynthesisRequest {
 
     public void setPer(String per) {
         this.per = per;
+    }
+
+    public String getAue() {
+        return aue;
+    }
+
+    public void setAue(String aue) {
+        this.aue = aue;
     }
 }

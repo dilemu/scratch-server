@@ -119,7 +119,7 @@ public class ImageController {
         return imageService.classifyDish(image);
     }
 
-    @PostMapping("/style/convert")
+    @RequestMapping(value = {"/style/convert"}, method = {RequestMethod.POST})
     @ApiOperation(value = "图像风格转换")
     private JsonResult<FeatureVO> convertStyle(@RequestParam("file") MultipartFile file, @RequestParam("style") String style) throws Exception {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
@@ -130,7 +130,7 @@ public class ImageController {
         return imageService.convertStyle(image, style);
     }
 
-    @PostMapping("/cartoon/portrait")
+    @RequestMapping(value = {"/cartoon/portrait"}, method = {RequestMethod.POST})
     @ApiOperation(value = "动漫人像")
     private JsonResult<FeatureVO> convertAnime(@RequestParam("file") MultipartFile file) throws Exception {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
@@ -139,5 +139,27 @@ public class ImageController {
 
         byte[] image = file.getBytes();
         return imageService.convertAnime(image);
+    }
+
+    @RequestMapping(value = {"/replace/background"}, method = {RequestMethod.POST})
+    @ApiOperation(value = "背景替换")
+    private JsonResult<FeatureVO> replaceBackground(@RequestParam("file") MultipartFile file, @RequestParam("style") String style) throws Exception {
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException("文件不能为空");
+        }
+
+        byte[] image = file.getBytes();
+        return imageService.replaceBackground(image);
+    }
+
+    @RequestMapping(value = {"/optimize"}, method = {RequestMethod.POST})
+    @ApiOperation(value = "图像优化")
+    private JsonResult<FeatureVO> optimizeImage(@RequestParam("file") MultipartFile file) throws Exception {
+        if (StringUtils.isBlank(file.getOriginalFilename())) {
+            throw new BizBaseException("文件不能为空");
+        }
+
+        byte[] image = file.getBytes();
+        return imageService.optimizeImage(image);
     }
 }
