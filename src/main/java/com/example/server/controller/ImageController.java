@@ -143,7 +143,7 @@ public class ImageController {
 
     @RequestMapping(value = {"/replace/background"}, method = {RequestMethod.POST})
     @ApiOperation(value = "背景替换")
-    private JsonResult<FeatureVO> replaceBackground(@RequestParam("file") MultipartFile file, @RequestParam("style") String style) throws Exception {
+    private JsonResult replaceBackground(@RequestParam("file") MultipartFile file) throws Exception {
         if (StringUtils.isBlank(file.getOriginalFilename())) {
             throw new BizBaseException("文件不能为空");
         }

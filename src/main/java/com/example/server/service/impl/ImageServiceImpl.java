@@ -172,16 +172,13 @@ public class ImageServiceImpl implements IImageService {
     }
 
     @Override
-    public JsonResult<FeatureVO> replaceBackground(byte[] image) {
+    public JsonResult replaceBackground(byte[] image) {
         HashMap<String, String> options = new HashMap<>();
         JSONObject res = client.skySeg(image, options);
         if (res.has("error_code"))
             return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
-        FeatureVO resultVO = new FeatureVO();
-        if (res.has("image"))
-            resultVO.setImage((String) res.get("image"));
-        resultVO.setLog_id((long) res.get("log_id"));
-        return JsonResult.success(resultVO);
+        Object result = res.toMap();
+        return JsonResult.success(result);
     }
 
     @Override
