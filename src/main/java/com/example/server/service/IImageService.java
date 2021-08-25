@@ -92,7 +92,7 @@ public interface IImageService {
      * @param image
      * @return
      */
-    JsonResult<FeatureVO> replaceBackground(byte[] image);
+    JsonResult replaceBackground(byte[] image);
 
     /**
      * 图像优化

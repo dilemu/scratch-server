@@ -4,6 +4,7 @@ import com.baidu.aip.bodyanalysis.AipBodyAnalysis;
 import com.baidu.aip.face.AipFace;
 import com.baidu.aip.imageclassify.AipImageClassify;
 import com.baidu.aip.imageprocess.AipImageProcess;
+import com.baidu.aip.nlp.AipNlp;
 import com.baidu.aip.ocr.AipOcr;
 import com.baidu.aip.speech.AipSpeech;
 
@@ -42,6 +43,11 @@ public class AIUtils {
 
     public static AipFace getFaceClient() {
         AipFace client = new AipFace("24733412", "bp5XQtzPwzGC7OmbLgqg0HZh", "lGD8SH8VZGx27yOLoeCTudZP04U0teMh");
+        return client;
+    }
+
+    public static AipNlp getNlpClient() {
+        AipNlp client = new AipNlp("24750253", "jaGV06yUkZbbA8ljMKNWb1HK", "wKDNVLihm0droA0MYf8UsOgwOzVBULv2");
         return client;
     }
 }
