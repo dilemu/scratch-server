@@ -69,8 +69,8 @@ public class WeatherController {
     @PostMapping("/time")
     @ApiOperation("时间")
     private JsonResult getTime(@RequestBody WeatherRequest weatherRequest) throws Exception {
-        if (StringUtils.isEmpty(weatherRequest.getLocation())) {
-            throw new BizBaseException("城市不可为空");
+        if (StringUtils.isEmpty(weatherRequest.getTimeZone())) {
+            throw new BizBaseException("时区不可为空");
         }
 
         return weatherService.getTime(weatherRequest);

@@ -1,0 +1,36 @@
+2021-08-26 17:11:56.664 [main] INFO  com.example.server.DemoApplication - Starting DemoApplication on 01DJ48020022436 with PID 19512 (D:\dilemu\scratch-server\target\classes started by 20022436 in D:\dilemu\scratch-server)
+2021-08-26 17:11:56.668 [main] INFO  com.example.server.DemoApplication - The following profiles are active: dev
+2021-08-26 17:11:58.677 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 60002 (http)
+2021-08-26 17:11:58.690 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-60002"]
+2021-08-26 17:11:58.691 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2021-08-26 17:11:58.692 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-08-26 17:11:58.978 [main] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2021-08-26 17:11:58.978 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2009 ms
+2021-08-26 17:11:59.520 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-08-26 17:11:59.571 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2021-08-26 17:11:59.838 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-60002"]
+2021-08-26 17:11:59.899 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 60002 (http) with context path '/api'
+2021-08-26 17:11:59.900 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2021-08-26 17:11:59.920 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2021-08-26 17:11:59.958 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2021-08-26 17:11:59.987 [main] INFO  com.example.server.DemoApplication - Started DemoApplication in 3.829 seconds (JVM running for 5.93)
+2021-08-26 17:12:05.144 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2021-08-26 17:12:10.510 [main] INFO  com.example.server.DemoApplication - Starting DemoApplication on 01DJ48020022436 with PID 2520 (D:\dilemu\scratch-server\target\classes started by 20022436 in D:\dilemu\scratch-server)
+2021-08-26 17:12:10.515 [main] INFO  com.example.server.DemoApplication - The following profiles are active: dev
+2021-08-26 17:12:12.901 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 60002 (http)
+2021-08-26 17:12:12.914 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-60002"]
+2021-08-26 17:12:12.915 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2021-08-26 17:12:12.915 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-08-26 17:12:13.206 [main] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2021-08-26 17:12:13.207 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2323 ms
+2021-08-26 17:12:13.784 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-08-26 17:12:13.838 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2021-08-26 17:12:14.095 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-60002"]
+2021-08-26 17:12:14.150 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 60002 (http) with context path '/api'
+2021-08-26 17:12:14.151 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2021-08-26 17:12:14.170 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2021-08-26 17:12:14.208 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2021-08-26 17:12:14.233 [main] INFO  com.example.server.DemoApplication - Started DemoApplication in 4.662 seconds (JVM running for 7.728)
+2021-08-26 17:13:10.121 [http-nio-60002-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-08-26 17:13:10.122 [http-nio-60002-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2021-08-26 17:13:10.128 [http-nio-60002-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 6 ms
