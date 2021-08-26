@@ -1,7 +1,5 @@
 package com.example.server.exception;
 
-import com.example.server.model.vo.JsonResult;
-
 import java.text.MessageFormat;
 
 /**

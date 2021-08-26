@@ -2,12 +2,9 @@ package com.example.server.controller;
 
 
 import com.example.server.exception.BizBaseException;
-import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.UserRequest;
 import com.example.server.model.vo.UserResult;
 import com.example.server.service.IUserService;
-import com.example.server.utils.HttpUtils;
-import com.example.server.utils.JsonUtils;
 import com.example.server.utils.StringUtils;
 import com.example.server.utils.UserContextUtils;
 import io.swagger.annotations.Api;
@@ -15,13 +12,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
-/**
- * <功能描述>
- *
- * @author
- * @date 2021/8/11 13:42
- */
 @Api("用户信息")
 @RestController
 @RequestMapping("/user")

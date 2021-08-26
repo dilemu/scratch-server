@@ -13,4 +13,6 @@ public interface IWeatherService {
     JsonResult getAirQuality(WeatherRequest weatherRequest) throws Exception;
 
     JsonResult<List> getCityList(WeatherRequest weatherRequest) throws Exception;
+
+    JsonResult getTime(WeatherRequest weatherRequest);
 }

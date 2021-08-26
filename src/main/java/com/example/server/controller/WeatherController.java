@@ -7,8 +7,6 @@ import com.example.server.service.IWeatherService;
 import com.example.server.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,18 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * <功能描述>
- *
- * @author 20022436
- * @date 2021/8/20 14:06
- */
 @RestController
 @Api("气候")
 @RequestMapping("/weather")
 public class WeatherController {
-    private final static Logger LOGGER = LoggerFactory.getLogger(WeatherController.class);
-
     private final IWeatherService weatherService;
 
     @Autowired
@@ -74,5 +64,15 @@ public class WeatherController {
         }
 
         return weatherService.getCityList(weatherRequest);
+    }
+
+    @PostMapping("/time")
+    @ApiOperation("时间")
+    private JsonResult getTime(@RequestBody WeatherRequest weatherRequest) throws Exception {
+        if (StringUtils.isEmpty(weatherRequest.getTimeZone())) {
+            throw new BizBaseException("时区不可为空");
+        }
+
+        return weatherService.getTime(weatherRequest);
     }
 }

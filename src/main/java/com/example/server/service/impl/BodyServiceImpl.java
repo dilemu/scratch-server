@@ -7,6 +7,8 @@ import com.example.server.model.vo.JsonResult;
 import com.example.server.service.IBodyService;
 import com.example.server.utils.AIUtils;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -14,6 +16,7 @@ import java.util.Map;
 
 @Service
 public class BodyServiceImpl implements IBodyService {
+    private final static Logger LOGGER = LoggerFactory.getLogger(BodyServiceImpl.class);
     private static AipBodyAnalysis client = AIUtils.getBodyClient();
 
     @Override

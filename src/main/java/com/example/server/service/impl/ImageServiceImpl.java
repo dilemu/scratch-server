@@ -12,6 +12,8 @@ import com.example.server.utils.SpringUtils;
 import com.example.server.utils.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -25,6 +27,7 @@ import java.util.Map;
  */
 @Service
 public class ImageServiceImpl implements IImageService {
+    private final static Logger LOGGER = LoggerFactory.getLogger(BodyServiceImpl.class);
 
     private static AipImageClassify CLIENT = AIUtils.getImageClient();
     private static AipImageProcess client = AIUtils.getImageProcessClient();
