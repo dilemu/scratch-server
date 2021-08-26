@@ -5,6 +5,8 @@ import com.example.server.model.vo.JsonResult;
 import com.example.server.service.IFaceService;
 import com.example.server.utils.AIUtils;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -12,6 +14,7 @@ import java.util.Map;
 
 @Service
 public class FaceServiceImpl implements IFaceService {
+    private final static Logger LOGGER = LoggerFactory.getLogger(BodyServiceImpl.class);
 
     @Override
     public JsonResult classifyFace(String image) {

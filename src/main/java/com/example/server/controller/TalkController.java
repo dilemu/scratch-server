@@ -5,27 +5,16 @@ import com.example.server.service.ITalkService;
 import com.example.server.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-/**
- * 智能对话
- *
- * @author
- * @date 2021/8/18 16:03
- */
 @Api("智能对话")
 @RestController
 @RequestMapping("/talk")
 public class TalkController {
-    private final static Logger LOGGER = LoggerFactory.getLogger(TalkController.class);
-
     private final ITalkService talkService;
 
     @Autowired

@@ -9,8 +9,9 @@ import com.example.server.service.ICharacterService;
 import com.example.server.utils.AIUtils;
 import com.example.server.utils.JsonUtils;
 import com.example.server.utils.StringUtils;
-import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -27,7 +28,7 @@ import java.util.Map;
  */
 @Service
 public class CharacterServiceImpl implements ICharacterService {
-
+    private final static Logger LOGGER = LoggerFactory.getLogger(BodyServiceImpl.class);
     private static AipOcr CLIENT = AIUtils.getOcrClient();
 
     @Override

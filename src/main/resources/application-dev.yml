@@ -11,12 +11,6 @@ spring:
       max-request-size: 500MB
   resources:
     static-locations: classpath:/templates/
-mybatis-plus:
-  mapper-locations: classpath*:com/haier/**/dao/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
-    object-wrapper-factory: com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory
-    call-setters-on-nulls: true
 
 # swagger配置
 swagger:

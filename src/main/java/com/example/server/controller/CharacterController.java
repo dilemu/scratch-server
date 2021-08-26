@@ -2,13 +2,10 @@ package com.example.server.controller;
 
 
 import com.example.server.exception.BizBaseException;
-import com.example.server.model.vo.CharacterResult;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.UniversalRequest;
 import com.example.server.service.ICharacterService;
-import com.example.server.service.IUserService;
 import com.example.server.utils.StringUtils;
-import com.example.server.utils.UserContextUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- * <功能描述>
- *
- * @author
- * @date 2021/8/12 15:41
- */
 @Api("文字识别")
 @RestController
 @RequestMapping("/character")

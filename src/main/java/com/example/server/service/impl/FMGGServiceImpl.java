@@ -5,6 +5,8 @@ import com.example.server.service.IFMGGService;
 import com.example.server.utils.HttpUtils;
 import com.example.server.utils.JsonUtils;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -17,6 +19,8 @@ import java.util.Map;
 
 @Service
 public class FMGGServiceImpl implements IFMGGService {
+    private final static Logger LOGGER = LoggerFactory.getLogger(BodyServiceImpl.class);
+
     @Override
     public JsonResult classifyDrink(String image) throws Exception {
         String accessToken = this.getAuth("m3E6uK7fcLG38HdYaOsPA98c", "QmB6gAiSKtvx1u7qF2haxg0k6TISGOar");

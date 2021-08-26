@@ -25,7 +25,7 @@ public class FMGGController {
     @ApiOperation("饮品识别")
     @PostMapping("/drink/classify")
     private JsonResult verifyDrink(@RequestParam("file") MultipartFile file) throws Exception {
-        if(StringUtils.isEmpty(file.getOriginalFilename())){
+        if (StringUtils.isEmpty(file.getOriginalFilename())) {
             throw new BizBaseException("文件不可为空");
         }
 

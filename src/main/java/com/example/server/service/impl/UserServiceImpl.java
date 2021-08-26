@@ -6,6 +6,8 @@ import com.example.server.model.vo.UserResult;
 import com.example.server.service.IUserService;
 import com.example.server.utils.HttpUtils;
 import com.example.server.utils.JsonUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ import java.util.Map;
  */
 @Service
 public class UserServiceImpl implements IUserService {
+    private final static Logger LOGGER = LoggerFactory.getLogger(BodyServiceImpl.class);
 
     @Override
     public UserResult login(UserRequest requestVO) {
