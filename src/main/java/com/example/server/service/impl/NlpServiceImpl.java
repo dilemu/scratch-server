@@ -1,18 +1,21 @@
 package com.example.server.service.impl;
 
 import com.baidu.aip.nlp.AipNlp;
+import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.AffectiveTendencyVO;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.NlpRequest;
+import com.example.server.model.vo.SinogramVO;
 import com.example.server.service.INlpService;
 import com.example.server.utils.AIUtils;
+import com.example.server.utils.HttpUtils;
 import com.example.server.utils.JsonUtils;
-import org.checkerframework.checker.units.qual.A;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,5 +100,29 @@ public class NlpServiceImpl implements INlpService {
             return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
         Object result = res.toMap();
         return JsonResult.success(result);
+    }
+
+    @Override
+    public JsonResult retrievalChinese(NlpRequest nlpRequest) throws Exception {
+        String accessToken = AIUtils.getAuth("y8N99V9ysUB4nEuOYU4lZGkH", "WupXP1GmYKDWT7AL0OmS3jzeHLujt3fR");
+        String url = "https://aip.baidubce.com/rpc/2.0/kg/v1/cognitive/chinese_search";
+        Map<String, String> paramsMap = new HashMap<>();
+        paramsMap.put("query", nlpRequest.getText());
+        String param = JsonUtils.objectToJson(paramsMap);
+        String res = HttpUtils.post(url, accessToken,"application/json", param);
+        Map objectMap = (Map) JsonUtils.jsonToObject(res, Object.class);
+        if(objectMap.containsKey("error_code")){
+            throw new BizBaseException((Integer) objectMap.get("error_code"),objectMap.get("error_msg").toString());
+        }
+        List resultList = (List) objectMap.get("result");
+        Map resultMap = (Map) resultList.get(0);
+        Object object = resultMap.get("response");
+        Map responseMap = (Map) object;
+        SinogramVO sinogramVO = new SinogramVO();
+        sinogramVO.setAnswer(responseMap.get("answer"));
+        if(responseMap.get("voice") != null){
+            sinogramVO.setVoice(responseMap.get("voice").toString());
+        }
+        return JsonResult.success(sinogramVO);
     }
 }

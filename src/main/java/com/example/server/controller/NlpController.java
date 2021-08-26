@@ -73,4 +73,14 @@ public class NlpController {
 
         return NlpService.classifyAddress(nlpRequest);
     }
+
+    @ApiOperation("汉语检索")
+    @PostMapping("/Chinese/retrieval")
+    private JsonResult retrievalChinese(@RequestBody NlpRequest nlpRequest) throws Exception {
+        if (StringUtils.isEmpty(nlpRequest.getText())) {
+            throw new BizBaseException("文本不可为空");
+        }
+
+        return NlpService.retrievalChinese(nlpRequest);
+    }
 }

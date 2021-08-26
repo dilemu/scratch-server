@@ -13,4 +13,6 @@ public interface INlpService {
     JsonResult recoverErrOfText(NlpRequest nlpRequest);
 
     JsonResult classifyAddress(NlpRequest nlpRequest);
+
+    JsonResult retrievalChinese(NlpRequest nlpRequest) throws Exception;
 }
