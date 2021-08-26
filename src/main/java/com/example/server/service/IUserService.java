@@ -6,9 +6,9 @@ import com.example.server.model.vo.UserResult;
 
 public interface IUserService {
 
-    UserResult login(UserRequest requestVO);
+    JsonResult login(UserRequest requestVO);
 
-    UserResult getUserInfo(String token) throws Exception;
+    JsonResult getUserInfo(String token) throws Exception;
 
-    UserResult verifyTimes(String token) throws Exception;
+    JsonResult verifyTimes(String token) throws Exception;
 }

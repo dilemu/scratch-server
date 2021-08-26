@@ -24,4 +24,9 @@ public class GlobalExceptionHandler {
     public JsonResult<Boolean> handleRuntimeException(BizBaseException e) {
         return JsonResult.error(e.getCode(),e.getMessage());
     }
+
+    @ExceptionHandler(Exception.class)
+    public JsonResult<Boolean> handleRuntimeException(Exception e) {
+        return JsonResult.error(e.getMessage());
+    }
 }

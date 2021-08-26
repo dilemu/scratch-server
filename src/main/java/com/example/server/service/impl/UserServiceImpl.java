@@ -1,5 +1,6 @@
 package com.example.server.service.impl;
 
+import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.UserRequest;
 import com.example.server.model.vo.UserResult;
@@ -28,36 +29,42 @@ public class UserServiceImpl implements IUserService {
     private final static Logger LOGGER = LoggerFactory.getLogger(BodyServiceImpl.class);
 
     @Override
-    public UserResult login(UserRequest requestVO) {
+    public JsonResult login(UserRequest requestVO) {
         RestTemplate restTemplate = new RestTemplate();
         Map<String, String> map = new HashMap<>();
         map.put("usrname", requestVO.getUserName());
         map.put("passwd", requestVO.getPassword());
         HttpEntity requestBody = new HttpEntity(map);
         ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://8.133.177.11/login", requestBody, String.class);
-        return JsonUtils.jsonToObject(responseEntity.getBody(), UserResult.class);
+        UserResult user = JsonUtils.jsonToObject(responseEntity.getBody(), UserResult.class);
+        return JsonResult.success(user.getData());
     }
 
     @Override
-    public UserResult getUserInfo(String token) throws Exception {
+    public JsonResult getUserInfo(String token) throws Exception {
         String url = "http://8.133.177.11/userinfo/" + token;
         Map<String, String> param = new HashMap<>();
         String result = HttpUtils.get(url);
-
-        return JsonUtils.jsonToObject(result, UserResult.class);
+        UserResult user = JsonUtils.jsonToObject(result, UserResult.class);
+        if (user.getCode().equals("401")) {
+            throw new BizBaseException(Integer.valueOf(user.getCode()), "账号余额不足");
+        } else if (user.getCode().equals("402")) {
+            throw new BizBaseException(Integer.valueOf(user.getCode()), "token无效，请重新登录");
+        }
+        return JsonResult.success(user.getData());
     }
 
     @Override
-    public UserResult verifyTimes(String token) throws Exception {
+    public JsonResult verifyTimes(String token) throws Exception {
         String url = "http://8.133.177.11/ai_times/" + token;
         String result = HttpUtils.get(url);
         UserResult user = JsonUtils.jsonToObject(result, UserResult.class);
         if (user.getCode().equals("401")) {
-            return UserResult.error(user.getCode(), "账号余额不足");
+            throw new BizBaseException(Integer.valueOf(user.getCode()), "账号余额不足");
         } else if (user.getCode().equals("402")) {
-            return UserResult.error(user.getCode(), "token无效，请重新登录");
+            throw new BizBaseException(Integer.valueOf(user.getCode()), "token无效，请重新登录");
         }
 
-        return user;
+        return JsonResult.success(user.getData());
     }
 }

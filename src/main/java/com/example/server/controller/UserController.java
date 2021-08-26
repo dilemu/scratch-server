@@ -2,6 +2,7 @@ package com.example.server.controller;
 
 
 import com.example.server.exception.BizBaseException;
+import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.UserRequest;
 import com.example.server.model.vo.UserResult;
 import com.example.server.service.IUserService;
@@ -26,7 +27,7 @@ public class UserController {
 
     @PostMapping("/login")
     @ApiOperation(value = "用户登录校验")
-    private UserResult getToken(@RequestBody UserRequest requestVO) {
+    private JsonResult getToken(@RequestBody UserRequest requestVO) {
         if (StringUtils.isAnyEmpty(requestVO.getUserName(), requestVO.getPassword())) {
             throw new BizBaseException("账号或密码为空");
         }
@@ -36,7 +37,7 @@ public class UserController {
 
     @GetMapping("/info")
     @ApiOperation(value = "用户信息查询")
-    private UserResult getUserInfo() throws Exception {
+    private JsonResult getUserInfo() throws Exception {
         String token = UserContextUtils.getAccessToken();
         if (StringUtils.isEmpty(token)) {
             throw new BizBaseException("token为空");
@@ -47,7 +48,7 @@ public class UserController {
 
     @GetMapping("/times")
     @ApiOperation(value = "用户次数验证")
-    private UserResult getAITimes() throws Exception {
+    private JsonResult getAITimes() throws Exception {
         String token = UserContextUtils.getAccessToken();
         if (StringUtils.isEmpty(token)) {
             throw new BizBaseException("token为空");

@@ -1,6 +1,7 @@
 package com.example.server.conifg;
 
 import com.example.server.exception.BizBaseException;
+import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.UserResult;
 import com.example.server.service.IUserService;
 import org.slf4j.Logger;
@@ -26,10 +27,10 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String access_token = request.getHeader("Access-Token");
-        UserResult user = userService.verifyTimes(access_token);
+        JsonResult user = userService.verifyTimes(access_token);
         if (!user.getCode().equals("200")) {
-            LOGGER.info("校验失败:" + user.getMsg());
-            throw new BizBaseException(Integer.valueOf(user.getCode()), user.getMsg());
+            LOGGER.info("校验失败:" + user.getMessage());
+            throw new BizBaseException(Integer.valueOf(user.getCode()), user.getMessage());
         } else {
             LOGGER.info("userInfo: "+user.getData());
             return true;
