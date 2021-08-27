@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StopWatch;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +30,12 @@ public class FaceServiceImpl implements IFaceService {
 
         // 人脸检测
         AipFace client = AIUtils.getFaceClient();
+        StopWatch sw = new StopWatch();
+        sw.start();
         JSONObject res = client.detect(image, imageType, options);
+        sw.stop();
+        LOGGER.info("返回结果:{}", res);
+        LOGGER.info("调用百度接口：人脸检测,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
             return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
         JSONObject result = (JSONObject) res.get("result");

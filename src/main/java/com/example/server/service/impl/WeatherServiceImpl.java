@@ -13,6 +13,7 @@ import com.example.server.utils.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StopWatch;
 
 import java.net.URLEncoder;
 import java.util.*;
@@ -31,7 +32,12 @@ public class WeatherServiceImpl implements IWeatherService {
     @Override
     public JsonResult getWeatherOfDays(WeatherRequest weatherRequest) throws Exception {
         String url = "https://devapi.qweather.com/v7/weather/3d?" + "location=" + URLEncoder.encode(weatherRequest.getLocation(), "utf-8") + "&key=" + key + "&unit=" + weatherRequest.getUnit();
+        StopWatch sw = new StopWatch();
+        sw.start();
         String result = HttpUtils.get(url);
+        sw.stop();
+        LOGGER.info("当天天气返回结果:{}", result);
+        LOGGER.info("调用和风天气接口：当天天气,耗时： " + sw.getTotalTimeSeconds() + " s");
         DailyDTO dailyDTO = JsonUtils.jsonToObject(result, DailyDTO.class);
         ArrayList weatherList = (ArrayList) dailyDTO.getDaily();
         return JsonResult.success(weatherList.get(0));
@@ -40,7 +46,12 @@ public class WeatherServiceImpl implements IWeatherService {
     @Override
     public JsonResult getCurrentWeather(WeatherRequest weatherRequest) throws Exception {
         String url = "https://devapi.qweather.com/v7/weather/now?" + "location=" + URLEncoder.encode(weatherRequest.getLocation(), "utf-8") + "&key=" + key + "&unit=" + weatherRequest.getUnit();
+        StopWatch sw = new StopWatch();
+        sw.start();
         String result = HttpUtils.get(url);
+        sw.stop();
+        LOGGER.info("实时天气返回结果:{}", result);
+        LOGGER.info("调用和风天气接口：当实时天气,耗时： " + sw.getTotalTimeSeconds() + " s");
         NowDTO nowDTO = JsonUtils.jsonToObject(result, NowDTO.class);
 
         return JsonResult.success(nowDTO.getNow());
@@ -49,7 +60,12 @@ public class WeatherServiceImpl implements IWeatherService {
     @Override
     public JsonResult getAirQuality(WeatherRequest weatherRequest) throws Exception {
         String url = "https://devapi.qweather.com/v7/air/now?" + "location=" + URLEncoder.encode(weatherRequest.getLocation(), "utf-8") + "&key=" + key;
+        StopWatch sw = new StopWatch();
+        sw.start();
         String result = HttpUtils.get(url);
+        sw.stop();
+        LOGGER.info("空气质量返回结果:{}", result);
+        LOGGER.info("调用和风天气接口：空气质量,耗时： " + sw.getTotalTimeSeconds() + " s");
         AirDTO airDTO = JsonUtils.jsonToObject(result, AirDTO.class);
         return JsonResult.success(airDTO.getNow());
     }
@@ -57,7 +73,12 @@ public class WeatherServiceImpl implements IWeatherService {
     @Override
     public JsonResult<List> getCityList(WeatherRequest weatherRequest) throws Exception {
         String cityUrl = "https://geoapi.qweather.com/v2/city/lookup?" + "location=" + URLEncoder.encode(weatherRequest.getLocation(), "utf-8") + "&key=" + key;
+        StopWatch sw = new StopWatch();
+        sw.start();
         String result = HttpUtils.get(cityUrl);
+        sw.stop();
+        LOGGER.info("城市列表返回结果:{}", result);
+        LOGGER.info("调用和风天气接口：城市列表,耗时： " + sw.getTotalTimeSeconds() + " s");
         CityDTO cityDTO = JsonUtils.jsonToObject(result, CityDTO.class);
         if (Integer.valueOf(cityDTO.getCode()) != 200) {
             WeatherErrorCode error = WeatherErrorCode.getError(Integer.valueOf(cityDTO.getCode()));

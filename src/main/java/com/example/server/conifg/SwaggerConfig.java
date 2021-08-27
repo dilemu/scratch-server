@@ -26,13 +26,13 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).pathMapping("/").select()
-                .apis(RequestHandlerSelectors.basePackage("com.haier.hprmc.permission.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.server.controller"))
                 .paths(Predicates.not(PathSelectors.regex("/error.*")))
                 .paths(PathSelectors.regex("/.*")).build();
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("权限中心-permission service").description("权限中心-PermissionService 接口文档")
+        return new ApiInfoBuilder().title("service").description("service 接口文档")
                 .termsOfServiceUrl("NO terms of service").version("v1.0").build();
     }
 

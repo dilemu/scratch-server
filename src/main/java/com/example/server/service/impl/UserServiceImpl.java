@@ -47,8 +47,10 @@ public class UserServiceImpl implements IUserService {
         String result = HttpUtils.get(url);
         UserResult user = JsonUtils.jsonToObject(result, UserResult.class);
         if (user.getCode().equals("401")) {
+            LOGGER.info("账号余额不足");
             throw new BizBaseException(Integer.valueOf(user.getCode()), "账号余额不足");
         } else if (user.getCode().equals("402")) {
+            LOGGER.info("token无效，请重新登录");
             throw new BizBaseException(Integer.valueOf(user.getCode()), "token无效，请重新登录");
         }
         return JsonResult.success(user.getData());
@@ -60,8 +62,10 @@ public class UserServiceImpl implements IUserService {
         String result = HttpUtils.get(url);
         UserResult user = JsonUtils.jsonToObject(result, UserResult.class);
         if (user.getCode().equals("401")) {
+            LOGGER.info("账号余额不足");
             throw new BizBaseException(Integer.valueOf(user.getCode()), "账号余额不足");
         } else if (user.getCode().equals("402")) {
+            LOGGER.info("token无效，请重新登录");
             throw new BizBaseException(Integer.valueOf(user.getCode()), "token无效，请重新登录");
         }
 
