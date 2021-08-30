@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public JsonResult<Boolean> handleRuntimeException(Exception e) {
+    public JsonResult<Boolean> handleException(Exception e) {
         return JsonResult.error(e.getMessage());
     }
 }

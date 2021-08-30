@@ -1,6 +1,7 @@
 package com.example.server.service.impl;
 
 import com.baidu.aip.bodyanalysis.AipBodyAnalysis;
+import com.example.server.exception.BizBaseException;
 import com.example.server.model.eum.Gesture;
 import com.example.server.model.vo.ImageVO;
 import com.example.server.model.vo.JsonResult;
@@ -31,7 +32,7 @@ public class BodyServiceImpl implements IBodyService {
         LOGGER.info("返回结果:{}", res);
         LOGGER.info("调用百度接口：人体关键点,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code")) {
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
         }
 
         Object object = res.getJSONArray("person_info").toList().get(0);
@@ -52,7 +53,7 @@ public class BodyServiceImpl implements IBodyService {
         LOGGER.info("调用百度接口：人体特征,耗时： " + sw.getTotalTimeSeconds()+ " s");
 
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
 
         Object result = res.getJSONArray("person_info").toList().get(0);
         Map resultMap = (Map) result;
@@ -70,7 +71,7 @@ public class BodyServiceImpl implements IBodyService {
         LOGGER.info("调用百度接口：人流量,耗时： " + sw.getTotalTimeSeconds()+ " s");
 
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
         return JsonResult.success(res.get("person_num"));
     }
 
@@ -84,7 +85,7 @@ public class BodyServiceImpl implements IBodyService {
         LOGGER.info("返回结果:{}", res);
         LOGGER.info("调用百度接口：手势识别,耗时： " + sw.getTotalTimeSeconds()+ " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("result").toList().get(0);
         Map resultMap = (Map) object;

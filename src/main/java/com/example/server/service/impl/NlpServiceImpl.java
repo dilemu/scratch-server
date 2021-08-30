@@ -37,7 +37,7 @@ public class NlpServiceImpl implements INlpService {
         LOGGER.info("词法分析返回结果:{}", res);
         LOGGER.info("调用百度接口：词法分析,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
         List result = res.getJSONArray("items").toList();
         return JsonResult.success(result);
     }
@@ -54,7 +54,7 @@ public class NlpServiceImpl implements INlpService {
         LOGGER.info("情感倾向分析返回结果:{}", res);
         LOGGER.info("调用百度接口：情感倾向分析,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
         Object resultObject = res.getJSONArray("items").toList().get(0);
         Map objectMap = (Map) resultObject;
         AffectiveTendencyVO affectiveTendencyVO = new AffectiveTendencyVO();
@@ -88,7 +88,7 @@ public class NlpServiceImpl implements INlpService {
         LOGGER.info("词义相似度返回结果:{}", res);
         LOGGER.info("调用百度接口：词义相似度,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
         Map result = res.toMap();
         double score = (double) result.get("score");
         return JsonResult.success((int) (score * 100));
@@ -104,7 +104,7 @@ public class NlpServiceImpl implements INlpService {
         LOGGER.info("文本纠错返回结果:{}", res);
         LOGGER.info("调用百度接口：文本纠错,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
         Map resultMap = res.toMap();
         return JsonResult.success(resultMap.get("item"));
     }
@@ -119,7 +119,7 @@ public class NlpServiceImpl implements INlpService {
         LOGGER.info("地址识别返回结果:{}", res);
         LOGGER.info("调用百度接口：地址识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
         Object result = res.toMap();
         return JsonResult.success(result);
     }
@@ -139,7 +139,7 @@ public class NlpServiceImpl implements INlpService {
         LOGGER.info("调用百度接口：汉语检索,耗时： " + sw.getTotalTimeSeconds() + " s");
         Map objectMap = (Map) JsonUtils.jsonToObject(res, Object.class);
         if (objectMap.containsKey("error_code")) {
-            return JsonResult.error((Integer) objectMap.get("error_code"), objectMap.get("error_msg").toString());
+            throw new BizBaseException((Integer) objectMap.get("error_code"), objectMap.get("error_msg").toString());
         }
         List resultList = (List) objectMap.get("result");
         Map resultMap = (Map) resultList.get(0);

@@ -1,6 +1,7 @@
 package com.example.server.service.impl;
 
 import com.baidu.aip.face.AipFace;
+import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.service.IFaceService;
 import com.example.server.utils.AIUtils;
@@ -37,7 +38,7 @@ public class FaceServiceImpl implements IFaceService {
         LOGGER.info("返回结果:{}", res);
         LOGGER.info("调用百度接口：人脸检测,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
         JSONObject result = (JSONObject) res.get("result");
         Object object = result.getJSONArray("face_list").toList().get(0);
         Map objectMap = (Map) object;

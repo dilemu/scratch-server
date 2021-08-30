@@ -1,5 +1,6 @@
 package com.example.server.service.impl;
 
+import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.*;
 import com.example.server.service.ITalkService;
 import com.example.server.utils.AuthUtils;
@@ -40,7 +41,7 @@ public class TalkServiceImpl implements ITalkService {
         LOGGER.info("调用百度接口：智能对话,耗时： " + sw.getTotalTimeSeconds() + " s");
         TalkResult talkResult = JsonUtils.jsonToObject(result, TalkResult.class);
         if (talkResult.getError_code() != 0) {
-            return JsonResult.error(talkResult.getError_code(), talkResult.getError_msg());
+            throw new BizBaseException(talkResult.getError_code(), talkResult.getError_msg());
         }
 
         Map resultMap = (Map) talkResult.getResult();

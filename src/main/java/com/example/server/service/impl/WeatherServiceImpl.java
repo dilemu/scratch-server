@@ -1,5 +1,6 @@
 package com.example.server.service.impl;
 
+import com.example.server.exception.BizBaseException;
 import com.example.server.model.dto.AirDTO;
 import com.example.server.model.dto.CityDTO;
 import com.example.server.model.dto.DailyDTO;
@@ -41,7 +42,7 @@ public class WeatherServiceImpl implements IWeatherService {
         DailyDTO dailyDTO = JsonUtils.jsonToObject(result, DailyDTO.class);
         if (Integer.valueOf(dailyDTO.getCode()) != 200) {
             WeatherErrorCode error = WeatherErrorCode.getError(Integer.valueOf(dailyDTO.getCode()));
-            return JsonResult.error(error.getCode(), error.getMsg());
+            throw new BizBaseException(error.getCode(), error.getMsg());
         }
         ArrayList weatherList = (ArrayList) dailyDTO.getDaily();
         return JsonResult.success(weatherList.get(0));
@@ -59,7 +60,7 @@ public class WeatherServiceImpl implements IWeatherService {
         NowDTO nowDTO = JsonUtils.jsonToObject(result, NowDTO.class);
         if (Integer.valueOf(nowDTO.getCode()) != 200) {
             WeatherErrorCode error = WeatherErrorCode.getError(Integer.valueOf(nowDTO.getCode()));
-            return JsonResult.error(error.getCode(), error.getMsg());
+            throw new BizBaseException(error.getCode(), error.getMsg());
         }
         return JsonResult.success(nowDTO.getNow());
     }
@@ -76,7 +77,7 @@ public class WeatherServiceImpl implements IWeatherService {
         AirDTO airDTO = JsonUtils.jsonToObject(result, AirDTO.class);
         if (Integer.valueOf(airDTO.getCode()) != 200) {
             WeatherErrorCode error = WeatherErrorCode.getError(Integer.valueOf(airDTO.getCode()));
-            return JsonResult.error(error.getCode(), error.getMsg());
+            throw new BizBaseException(error.getCode(), error.getMsg());
         }
         return JsonResult.success(airDTO.getNow());
     }
@@ -93,7 +94,7 @@ public class WeatherServiceImpl implements IWeatherService {
         CityDTO cityDTO = JsonUtils.jsonToObject(result, CityDTO.class);
         if (Integer.valueOf(cityDTO.getCode()) != 200) {
             WeatherErrorCode error = WeatherErrorCode.getError(Integer.valueOf(cityDTO.getCode()));
-            return JsonResult.error(error.getCode(), error.getMsg());
+            throw new BizBaseException(error.getCode(), error.getMsg());
         }
 
         List cityList = (List) cityDTO.getLocation();

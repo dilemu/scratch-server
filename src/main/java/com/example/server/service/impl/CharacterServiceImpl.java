@@ -1,6 +1,7 @@
 package com.example.server.service.impl;
 
 import com.baidu.aip.ocr.AipOcr;
+import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.CharacterResult;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.LicensePlateVO;
@@ -44,7 +45,7 @@ public class CharacterServiceImpl implements ICharacterService {
         LOGGER.info("调用百度接口：车牌识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         CharacterResult result = JsonUtils.jsonToObject(res.toString(2), CharacterResult.class);
         if (StringUtils.isNotEmpty(result.getError_code()))
-            return JsonResult.error(Integer.valueOf(result.getError_code()), result.getError_msg());
+            throw new BizBaseException(Integer.valueOf(result.getError_code()), result.getError_msg());
         Map resultMap = (Map) result.getWords_result();
         List<Object> probability = (List<Object>) resultMap.get("probability");
 
@@ -70,7 +71,7 @@ public class CharacterServiceImpl implements ICharacterService {
         LOGGER.info("调用百度接口：通用文字识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         CharacterResult result = JsonUtils.jsonToObject(res.toString(2), CharacterResult.class);
         if (StringUtils.isNotEmpty(result.getError_code()))
-            return JsonResult.error(Integer.valueOf(result.getError_code()), result.getError_msg());
+            throw new BizBaseException(Integer.valueOf(result.getError_code()), result.getError_msg());
 
         return JsonResult.success(result.getWords_result());
     }
@@ -86,7 +87,7 @@ public class CharacterServiceImpl implements ICharacterService {
         LOGGER.info("调用百度接口：二维码识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         CharacterResult result = JsonUtils.jsonToObject(res.toString(2), CharacterResult.class);
         if (StringUtils.isNotEmpty(result.getError_code()))
-            return JsonResult.error(Integer.valueOf(result.getError_code()), result.getError_msg());
+            throw new BizBaseException(Integer.valueOf(result.getError_code()), result.getError_msg());
         return JsonResult.success(result.getCodes_result());
     }
 
@@ -104,7 +105,7 @@ public class CharacterServiceImpl implements ICharacterService {
         LOGGER.info("调用百度接口：手写文字识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         CharacterResult result = JsonUtils.jsonToObject(res.toString(2), CharacterResult.class);
         if (StringUtils.isNotEmpty(result.getError_code()))
-            return JsonResult.error(Integer.valueOf(result.getError_code()), result.getError_msg());
+            throw new BizBaseException(Integer.valueOf(result.getError_code()), result.getError_msg());
         return JsonResult.success(result.getWords_result());
     }
 }

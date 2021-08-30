@@ -40,7 +40,7 @@ public class VoiceServiceImpl implements IVoiceService {
         LOGGER.info("返回结果:{}", voice);
         LOGGER.info("调用百度接口：语音识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (voice.getInt("err_no") != 0) {
-            return JsonResult.error(voice.getInt("err_no"), voice.getString("err_msg"));
+            throw new BizBaseException(voice.getInt("err_no"), voice.getString("err_msg"));
         }
 
         JSONArray result = voice.getJSONArray("result");

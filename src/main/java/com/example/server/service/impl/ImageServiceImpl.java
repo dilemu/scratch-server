@@ -3,6 +3,7 @@ package com.example.server.service.impl;
 import com.baidu.aip.imageclassify.AipImageClassify;
 import com.baidu.aip.imageprocess.AipImageProcess;
 import com.baidu.aip.ocr.AipOcr;
+import com.example.server.exception.BizBaseException;
 import com.example.server.model.eum.Gesture;
 import com.example.server.model.vo.*;
 import com.example.server.service.IImageService;
@@ -43,7 +44,7 @@ public class ImageServiceImpl implements IImageService {
         LOGGER.info("通用图片识别返回结果:{}", res);
         LOGGER.info("调用百度接口：通用图片识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("result").toList().get(0);
         ImageVO resultVO = new ImageVO();
@@ -63,7 +64,7 @@ public class ImageServiceImpl implements IImageService {
         LOGGER.info("动物识别返回结果:{}", res);
         LOGGER.info("调用百度接口：动物识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("result").toList().get(0);
         ImageVO resultVO = new ImageVO();
@@ -83,7 +84,7 @@ public class ImageServiceImpl implements IImageService {
         LOGGER.info("植物识别返回结果:{}", res);
         LOGGER.info("调用百度接口：植物识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("result").toList().get(0);
         ImageVO resultVO = new ImageVO();
@@ -103,7 +104,7 @@ public class ImageServiceImpl implements IImageService {
         LOGGER.info("果蔬识别返回结果:{}", res);
         LOGGER.info("调用百度接口：果蔬识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("result").toList().get(0);
         ImageVO resultVO = new ImageVO();
@@ -123,7 +124,7 @@ public class ImageServiceImpl implements IImageService {
         LOGGER.info("地标识别返回结果:{}", res);
         LOGGER.info("调用百度接口：地标识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
 
         String result = res.get("result").toString();
         return JsonResult.success(JsonUtils.jsonToObject(result, Landmark.class));
@@ -139,7 +140,7 @@ public class ImageServiceImpl implements IImageService {
         LOGGER.info("货币识别返回结果:{}", res);
         LOGGER.info("调用百度接口：货币识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
 
         String result = res.get("result").toString();
         return JsonResult.success(JsonUtils.jsonToObject(result, CurrencyVO.class));
@@ -155,7 +156,7 @@ public class ImageServiceImpl implements IImageService {
         LOGGER.info("logo识别返回结果:{}", res);
         LOGGER.info("调用百度接口：logo识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("result").toList().get(0);
         Map resultMap = (Map) object;
@@ -176,7 +177,7 @@ public class ImageServiceImpl implements IImageService {
         LOGGER.info("菜品识别返回结果:{}", res);
         LOGGER.info("调用百度接口：菜品识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("result").toList().get(0);
         Map resultMap = (Map) object;
@@ -198,7 +199,7 @@ public class ImageServiceImpl implements IImageService {
         LOGGER.info("图像风格转换返回结果:{}", res);
         LOGGER.info("调用百度接口：图像风格转换识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
 
         FeatureVO resultVO = new FeatureVO();
         if (res.has("image"))
@@ -217,7 +218,7 @@ public class ImageServiceImpl implements IImageService {
         LOGGER.info("人物动漫化返回结果:{}", res);
         LOGGER.info("调用百度接口：人物动漫化,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
         FeatureVO resultVO = new FeatureVO();
         if (res.has("image"))
             resultVO.setImage((String) res.get("image"));
@@ -235,7 +236,7 @@ public class ImageServiceImpl implements IImageService {
         LOGGER.info("背景替换返回结果:{}", res);
         LOGGER.info("调用百度接口：背景替换,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
         Object result = res.toMap();
         return JsonResult.success(result);
     }
@@ -250,7 +251,7 @@ public class ImageServiceImpl implements IImageService {
         LOGGER.info("图像优化返回结果:{}", res);
         LOGGER.info("调用百度接口：图像优化,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
-            return JsonResult.error(res.getInt("error_code"), res.getString("error_msg"));
+            throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
         FeatureVO resultVO = new FeatureVO();
         if (res.has("image"))
             resultVO.setImage((String) res.get("image"));
