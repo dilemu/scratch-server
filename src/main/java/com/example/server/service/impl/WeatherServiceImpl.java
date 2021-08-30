@@ -39,6 +39,10 @@ public class WeatherServiceImpl implements IWeatherService {
         LOGGER.info("当天天气返回结果:{}", result);
         LOGGER.info("调用和风天气接口：当天天气,耗时： " + sw.getTotalTimeSeconds() + " s");
         DailyDTO dailyDTO = JsonUtils.jsonToObject(result, DailyDTO.class);
+        if (Integer.valueOf(dailyDTO.getCode()) != 200) {
+            WeatherErrorCode error = WeatherErrorCode.getError(Integer.valueOf(dailyDTO.getCode()));
+            return JsonResult.error(error.getCode(), error.getMsg());
+        }
         ArrayList weatherList = (ArrayList) dailyDTO.getDaily();
         return JsonResult.success(weatherList.get(0));
     }
@@ -53,7 +57,10 @@ public class WeatherServiceImpl implements IWeatherService {
         LOGGER.info("实时天气返回结果:{}", result);
         LOGGER.info("调用和风天气接口：当实时天气,耗时： " + sw.getTotalTimeSeconds() + " s");
         NowDTO nowDTO = JsonUtils.jsonToObject(result, NowDTO.class);
-
+        if (Integer.valueOf(nowDTO.getCode()) != 200) {
+            WeatherErrorCode error = WeatherErrorCode.getError(Integer.valueOf(nowDTO.getCode()));
+            return JsonResult.error(error.getCode(), error.getMsg());
+        }
         return JsonResult.success(nowDTO.getNow());
     }
 
@@ -67,6 +74,10 @@ public class WeatherServiceImpl implements IWeatherService {
         LOGGER.info("空气质量返回结果:{}", result);
         LOGGER.info("调用和风天气接口：空气质量,耗时： " + sw.getTotalTimeSeconds() + " s");
         AirDTO airDTO = JsonUtils.jsonToObject(result, AirDTO.class);
+        if (Integer.valueOf(airDTO.getCode()) != 200) {
+            WeatherErrorCode error = WeatherErrorCode.getError(Integer.valueOf(airDTO.getCode()));
+            return JsonResult.error(error.getCode(), error.getMsg());
+        }
         return JsonResult.success(airDTO.getNow());
     }
 

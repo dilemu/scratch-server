@@ -1,5 +1,6 @@
 package com.example.server.controller;
 
+import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.*;
 import com.example.server.service.ITalkService;
 import com.example.server.utils.StringUtils;
@@ -27,11 +28,10 @@ public class TalkController {
     private JsonResult utterance(@RequestBody Request request) throws Exception {
         if (StringUtils.isEmpty(request.getTerminal_id())) {
             request.setTerminal_id("000");
-//            return JsonResult.error("Terminal_id can not be null");
         }
 
         if (StringUtils.isEmpty(request.getQuery())) {
-            return JsonResult.error("query can not be null");
+            throw new BizBaseException("query can not be null");
         }
 
         return talkService.getResponse(request);

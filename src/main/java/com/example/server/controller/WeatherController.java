@@ -33,6 +33,9 @@ public class WeatherController {
             throw new BizBaseException("城市不可为空");
         }
 
+        if (StringUtils.isEmpty(weatherRequest.getUnit()))
+            weatherRequest.setUnit("m");
+
         return weatherService.getWeatherOfDays(weatherRequest);
     }
 
@@ -42,6 +45,8 @@ public class WeatherController {
         if (StringUtils.isEmpty(weatherRequest.getLocation())) {
             throw new BizBaseException("城市不可为空");
         }
+        if (StringUtils.isEmpty(weatherRequest.getUnit()))
+            weatherRequest.setUnit("m");
 
         return weatherService.getCurrentWeather(weatherRequest);
     }

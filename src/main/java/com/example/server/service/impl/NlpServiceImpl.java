@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -140,7 +139,7 @@ public class NlpServiceImpl implements INlpService {
         LOGGER.info("调用百度接口：汉语检索,耗时： " + sw.getTotalTimeSeconds() + " s");
         Map objectMap = (Map) JsonUtils.jsonToObject(res, Object.class);
         if (objectMap.containsKey("error_code")) {
-            throw new BizBaseException((Integer) objectMap.get("error_code"), objectMap.get("error_msg").toString());
+            return JsonResult.error((Integer) objectMap.get("error_code"), objectMap.get("error_msg").toString());
         }
         List resultList = (List) objectMap.get("result");
         Map resultMap = (Map) resultList.get(0);

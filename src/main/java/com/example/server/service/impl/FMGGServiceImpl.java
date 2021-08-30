@@ -1,6 +1,5 @@
 package com.example.server.service.impl;
 
-import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.service.IFMGGService;
 import com.example.server.utils.AIUtils;
@@ -33,7 +32,7 @@ public class FMGGServiceImpl implements IFMGGService {
         LOGGER.info("调用百度接口：快消识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         Map result = (Map) JsonUtils.jsonToObject(res, Object.class);
         if (result.containsKey("error_code")) {
-            throw new BizBaseException((Integer) result.get("error_code"), result.get("error_msg").toString());
+            return JsonResult.error((Integer) result.get("error_code"), result.get("error_msg").toString());
         }
         return JsonResult.success(result.get("results"));
     }
