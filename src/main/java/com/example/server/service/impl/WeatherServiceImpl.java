@@ -5,7 +5,7 @@ import com.example.server.model.dto.AirDTO;
 import com.example.server.model.dto.CityDTO;
 import com.example.server.model.dto.DailyDTO;
 import com.example.server.model.dto.NowDTO;
-import com.example.server.model.eum.WeatherErrorCode;
+import com.example.server.model.eum.WeatherErrorCodeEnum;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.WeatherRequest;
 import com.example.server.service.IWeatherService;
@@ -41,7 +41,7 @@ public class WeatherServiceImpl implements IWeatherService {
         LOGGER.info("调用和风天气接口：当天天气,耗时： " + sw.getTotalTimeSeconds() + " s");
         DailyDTO dailyDTO = JsonUtils.jsonToObject(result, DailyDTO.class);
         if (Integer.valueOf(dailyDTO.getCode()) != 200) {
-            WeatherErrorCode error = WeatherErrorCode.getError(Integer.valueOf(dailyDTO.getCode()));
+            WeatherErrorCodeEnum error = WeatherErrorCodeEnum.getError(Integer.valueOf(dailyDTO.getCode()));
             throw new BizBaseException(error.getCode(), error.getMsg());
         }
         ArrayList weatherList = (ArrayList) dailyDTO.getDaily();
@@ -59,7 +59,7 @@ public class WeatherServiceImpl implements IWeatherService {
         LOGGER.info("调用和风天气接口：当实时天气,耗时： " + sw.getTotalTimeSeconds() + " s");
         NowDTO nowDTO = JsonUtils.jsonToObject(result, NowDTO.class);
         if (Integer.valueOf(nowDTO.getCode()) != 200) {
-            WeatherErrorCode error = WeatherErrorCode.getError(Integer.valueOf(nowDTO.getCode()));
+            WeatherErrorCodeEnum error = WeatherErrorCodeEnum.getError(Integer.valueOf(nowDTO.getCode()));
             throw new BizBaseException(error.getCode(), error.getMsg());
         }
         return JsonResult.success(nowDTO.getNow());
@@ -76,7 +76,7 @@ public class WeatherServiceImpl implements IWeatherService {
         LOGGER.info("调用和风天气接口：空气质量,耗时： " + sw.getTotalTimeSeconds() + " s");
         AirDTO airDTO = JsonUtils.jsonToObject(result, AirDTO.class);
         if (Integer.valueOf(airDTO.getCode()) != 200) {
-            WeatherErrorCode error = WeatherErrorCode.getError(Integer.valueOf(airDTO.getCode()));
+            WeatherErrorCodeEnum error = WeatherErrorCodeEnum.getError(Integer.valueOf(airDTO.getCode()));
             throw new BizBaseException(error.getCode(), error.getMsg());
         }
         return JsonResult.success(airDTO.getNow());
@@ -93,7 +93,7 @@ public class WeatherServiceImpl implements IWeatherService {
         LOGGER.info("调用和风天气接口：城市列表,耗时： " + sw.getTotalTimeSeconds() + " s");
         CityDTO cityDTO = JsonUtils.jsonToObject(result, CityDTO.class);
         if (Integer.valueOf(cityDTO.getCode()) != 200) {
-            WeatherErrorCode error = WeatherErrorCode.getError(Integer.valueOf(cityDTO.getCode()));
+            WeatherErrorCodeEnum error = WeatherErrorCodeEnum.getError(Integer.valueOf(cityDTO.getCode()));
             throw new BizBaseException(error.getCode(), error.getMsg());
         }
 

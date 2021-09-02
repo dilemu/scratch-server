@@ -2,16 +2,11 @@ package com.example.server.service.impl;
 
 import com.baidu.aip.imageclassify.AipImageClassify;
 import com.baidu.aip.imageprocess.AipImageProcess;
-import com.baidu.aip.ocr.AipOcr;
 import com.example.server.exception.BizBaseException;
-import com.example.server.model.eum.Gesture;
 import com.example.server.model.vo.*;
 import com.example.server.service.IImageService;
 import com.example.server.utils.AIUtils;
 import com.example.server.utils.JsonUtils;
-import com.example.server.utils.SpringUtils;
-import com.example.server.utils.StringUtils;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

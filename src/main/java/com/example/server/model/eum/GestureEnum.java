@@ -1,6 +1,6 @@
 package com.example.server.model.eum;
 
-public enum Gesture {
+public enum GestureEnum {
     One("数字1（原食指", 1), Five("数字5（原掌心向前）", 2), Fist("拳头", 3), OK("OK", 4),
     Prayer("祈祷", 5), Congratulation("作揖", 6), Honour("作别", 7), Heart_single("单手比心", 8),
     Thumb_up("点赞", 9), Thumb_down("Diss", 10), ILY("Rock", 11), Palm_up("掌心向上", 12),
@@ -11,7 +11,7 @@ public enum Gesture {
     private String name;
     private int index;
 
-    Gesture(String name, int index) {
+    GestureEnum(String name, int index) {
         this.name = name;
         this.index = index;
     }

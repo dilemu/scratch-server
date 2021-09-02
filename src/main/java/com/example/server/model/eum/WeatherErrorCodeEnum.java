@@ -1,6 +1,6 @@
 package com.example.server.model.eum;
 
-public enum WeatherErrorCode {
+public enum WeatherErrorCodeEnum {
     one(204, "请求成功，但你查询的地区暂时没有你需要的数据。"),
     two(400, "请求错误，可能包含错误的请求参数或缺少必选的请求参数。"),
     three(401, "认证失败，可能使用了错误的KEY、数字签名错误、KEY的类型错误（如使用SDK的KEY去访问Web API）。"),
@@ -13,10 +13,10 @@ public enum WeatherErrorCode {
     private int code;
     private String msg;
 
-    WeatherErrorCode() {
+    WeatherErrorCodeEnum() {
     }
 
-    WeatherErrorCode(int code, String msg) {
+    WeatherErrorCodeEnum(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }
@@ -37,8 +37,8 @@ public enum WeatherErrorCode {
         this.msg = msg;
     }
 
-    public static WeatherErrorCode getError(Integer code) {
-        for (WeatherErrorCode weatherErrorCode : WeatherErrorCode.values()) {
+    public static WeatherErrorCodeEnum getError(Integer code) {
+        for (WeatherErrorCodeEnum weatherErrorCode : WeatherErrorCodeEnum.values()) {
             if (weatherErrorCode.getCode() == code) {
                 return weatherErrorCode;
             }

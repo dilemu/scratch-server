@@ -2,9 +2,13 @@ package com.example.server.service.impl;
 
 import com.baidu.aip.face.AipFace;
 import com.example.server.exception.BizBaseException;
+import com.example.server.model.eum.EmotionEnum;
+import com.example.server.model.vo.EmotionVO;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.service.IFaceService;
 import com.example.server.utils.AIUtils;
+import com.example.server.utils.JsonUtils;
+import com.google.gson.JsonObject;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,11 +41,16 @@ public class FaceServiceImpl implements IFaceService {
         sw.stop();
         LOGGER.info("返回结果:{}", res);
         LOGGER.info("调用百度接口：人脸检测,耗时： " + sw.getTotalTimeSeconds() + " s");
-        if (res.has("error_code"))
+        if (res.get("error_code").equals("0"))
             throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
         JSONObject result = (JSONObject) res.get("result");
         Object object = result.getJSONArray("face_list").toList().get(0);
         Map objectMap = (Map) object;
-        return JsonResult.success(objectMap.get("emotion"));
+        EmotionVO emotionVO = new EmotionVO();
+        Map emotionMap = (Map) objectMap.get("emotion");
+        emotionVO.setProbability(Double.valueOf(emotionMap.get("probability").toString()));
+        emotionVO.setType(EmotionEnum.valueOf(emotionMap.get("type").toString()).getValue());
+
+        return JsonResult.success(emotionVO);
     }
 }

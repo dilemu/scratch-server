@@ -2,7 +2,7 @@ package com.example.server.service.impl;
 
 import com.baidu.aip.bodyanalysis.AipBodyAnalysis;
 import com.example.server.exception.BizBaseException;
-import com.example.server.model.eum.Gesture;
+import com.example.server.model.eum.GestureEnum;
 import com.example.server.model.vo.ImageVO;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.service.IBodyService;
@@ -43,7 +43,6 @@ public class BodyServiceImpl implements IBodyService {
     @Override
     public JsonResult getCharacteristicsOfBody(byte[] image, String type) {
         HashMap<String, String> options = new HashMap<>();
-        options.put("type", type);
 
         StopWatch sw = new StopWatch();
         sw.start();
@@ -90,7 +89,7 @@ public class BodyServiceImpl implements IBodyService {
         Object object = res.getJSONArray("result").toList().get(0);
         Map resultMap = (Map) object;
         ImageVO imageVO = new ImageVO();
-        imageVO.setName(Gesture.valueOf(resultMap.get("classname").toString()).getName());
+        imageVO.setName(GestureEnum.valueOf(resultMap.get("classname").toString()).getName());
         imageVO.setScore((Double) resultMap.get("probability"));
 
         return JsonResult.success(imageVO);

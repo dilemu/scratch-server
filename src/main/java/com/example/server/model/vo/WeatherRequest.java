@@ -11,7 +11,7 @@ public class WeatherRequest {
 
     private String unit;
 
-    String timeZone;
+    private String timeZone;
 
 
     public String getLocation() {
