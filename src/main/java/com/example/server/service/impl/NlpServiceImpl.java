@@ -2,10 +2,8 @@ package com.example.server.service.impl;
 
 import com.baidu.aip.nlp.AipNlp;
 import com.example.server.exception.BizBaseException;
-import com.example.server.model.vo.AffectiveTendencyVO;
-import com.example.server.model.vo.JsonResult;
-import com.example.server.model.vo.NlpRequest;
-import com.example.server.model.vo.SinogramVO;
+import com.example.server.model.eum.NeEnum;
+import com.example.server.model.vo.*;
 import com.example.server.service.INlpService;
 import com.example.server.utils.AIUtils;
 import com.example.server.utils.HttpUtils;
@@ -16,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +37,23 @@ public class NlpServiceImpl implements INlpService {
         LOGGER.info("调用百度接口：词法分析,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
             throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
-        List result = res.getJSONArray("items").toList();
-        return JsonResult.success(result);
+        List resList = res.getJSONArray("items").toList();
+        List<LexicalVO> resultList = new ArrayList<>();
+        for (Object object : resList) {
+            LexicalVO lexicalVO = new LexicalVO();
+            Map objectMap = (Map) object;
+            lexicalVO.setNe(NeEnum.getValue(objectMap.get("ne").toString()));
+            lexicalVO.setPos(NeEnum.getValue(objectMap.get("pos").toString()));
+            lexicalVO.setBasic_words(objectMap.get("basic_words"));
+            lexicalVO.setByte_length((Integer) objectMap.get("byte_length"));
+            lexicalVO.setByte_offset((Integer) objectMap.get("byte_offset"));
+            lexicalVO.setFormal(objectMap.get("formal").toString());
+            lexicalVO.setItem(objectMap.get("item").toString());
+            lexicalVO.setLoc_details(objectMap.get("loc_details"));
+            lexicalVO.setUri(objectMap.get("uri").toString());
+            resultList.add(lexicalVO);
+        }
+        return JsonResult.success(resultList);
     }
 
     @Override

@@ -13,8 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class BodyServiceImpl implements IBodyService {
@@ -49,7 +48,7 @@ public class BodyServiceImpl implements IBodyService {
         JSONObject res = client.bodyAttr(image, options);
         sw.stop();
         LOGGER.info("返回结果:{}", res);
-        LOGGER.info("调用百度接口：人体特征,耗时： " + sw.getTotalTimeSeconds()+ " s");
+        LOGGER.info("调用百度接口：人体特征,耗时： " + sw.getTotalTimeSeconds() + " s");
 
         if (res.has("error_code"))
             throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
@@ -67,7 +66,7 @@ public class BodyServiceImpl implements IBodyService {
         JSONObject res = client.bodyNum(image, options);
         sw.stop();
         LOGGER.info("返回结果:{}", res);
-        LOGGER.info("调用百度接口：人流量,耗时： " + sw.getTotalTimeSeconds()+ " s");
+        LOGGER.info("调用百度接口：人流量,耗时： " + sw.getTotalTimeSeconds() + " s");
 
         if (res.has("error_code"))
             throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
@@ -82,14 +81,21 @@ public class BodyServiceImpl implements IBodyService {
         JSONObject res = client.gesture(image, options);
         sw.stop();
         LOGGER.info("返回结果:{}", res);
-        LOGGER.info("调用百度接口：手势识别,耗时： " + sw.getTotalTimeSeconds()+ " s");
+        LOGGER.info("调用百度接口：手势识别,耗时： " + sw.getTotalTimeSeconds() + " s");
         if (res.has("error_code"))
             throw new BizBaseException(res.getInt("error_code"), res.getString("error_msg"));
 
         Object object = res.getJSONArray("result").toList().get(0);
         Map resultMap = (Map) object;
         ImageVO imageVO = new ImageVO();
-        imageVO.setName(GestureEnum.valueOf(resultMap.get("classname").toString()).getName());
+        List<String> gestureList = new ArrayList<>();
+        for (GestureEnum gesture : GestureEnum.values()) {
+            gestureList.add(gesture.getKey());
+        }
+        if (!gestureList.contains(resultMap.get("classname").toString())) {
+            throw new BizBaseException(500, "无法识别");
+        }
+        imageVO.setName(GestureEnum.valueOf(resultMap.get("classname").toString()).getValue());
         imageVO.setScore((Double) resultMap.get("probability"));
 
         return JsonResult.success(imageVO);
