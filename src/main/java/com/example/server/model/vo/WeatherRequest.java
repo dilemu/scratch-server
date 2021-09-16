@@ -13,6 +13,7 @@ public class WeatherRequest {
 
     private String timeZone;
 
+    private int type;
 
     public String getLocation() {
         return location;
@@ -36,5 +37,13 @@ public class WeatherRequest {
 
     public void setTimeZone(String timeZone) {
         this.timeZone = timeZone;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

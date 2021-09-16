@@ -3,6 +3,7 @@ package com.example.server.service;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.WeatherRequest;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public interface IWeatherService {
@@ -15,4 +16,6 @@ public interface IWeatherService {
     JsonResult<List> getCityList(WeatherRequest weatherRequest) throws Exception;
 
     JsonResult getTime(WeatherRequest weatherRequest);
+
+    JsonResult getIndices(WeatherRequest weatherRequest) throws UnsupportedEncodingException, Exception;
 }

@@ -1,6 +1,7 @@
 package com.example.server.model.vo;
 
 public class NlpRequest {
+    private String type;
     private String text;
     private String text_2;
 
@@ -18,5 +19,13 @@ public class NlpRequest {
 
     public void setText_2(String text_2) {
         this.text_2 = text_2;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

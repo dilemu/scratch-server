@@ -80,4 +80,14 @@ public class WeatherController {
 
         return weatherService.getTime(weatherRequest);
     }
+
+    @PostMapping("/indices")
+    @ApiOperation("紫外线")
+    private JsonResult getIndices(@RequestBody WeatherRequest weatherRequest) throws Exception {
+        if (StringUtils.isEmpty(weatherRequest.getLocation())) {
+            throw new BizBaseException("城市不可为空");
+        }
+
+        return weatherService.getIndices(weatherRequest);
+    }
 }

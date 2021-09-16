@@ -7,8 +7,6 @@ import com.example.server.model.vo.EmotionVO;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.service.IFaceService;
 import com.example.server.utils.AIUtils;
-import com.example.server.utils.JsonUtils;
-import com.google.gson.JsonObject;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

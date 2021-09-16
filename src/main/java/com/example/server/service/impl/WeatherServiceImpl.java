@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -108,5 +109,23 @@ public class WeatherServiceImpl implements IWeatherService {
         String date = cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.DAY_OF_MONTH);
         String time = cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
         return JsonResult.success(date + " " + time);
+    }
+
+    @Override
+    public JsonResult getIndices(WeatherRequest weatherRequest) throws Exception {
+        String url = "https://devapi.qweather.com/v7/indices/1d?" + "type=" + weatherRequest.getType() + "&location=" + URLEncoder.encode(weatherRequest.getLocation(), "utf-8") + "&key=" + key;
+        StopWatch sw = new StopWatch();
+        sw.start();
+        String result = HttpUtils.get(url);
+        sw.stop();
+        LOGGER.info("紫外线返回结果:{}", result);
+        LOGGER.info("调用和风天气接口：紫外线,耗时： " + sw.getTotalTimeSeconds() + " s");
+        DailyDTO dailyDTO = JsonUtils.jsonToObject(result, DailyDTO.class);
+        if (Integer.valueOf(dailyDTO.getCode()) != 200) {
+            WeatherErrorCodeEnum error = WeatherErrorCodeEnum.getError(Integer.valueOf(dailyDTO.getCode()));
+            throw new BizBaseException(error.getCode(), error.getMsg());
+        }
+        ArrayList indicesList = (ArrayList) dailyDTO.getDaily();
+        return JsonResult.success(indicesList.get(0));
     }
 }
