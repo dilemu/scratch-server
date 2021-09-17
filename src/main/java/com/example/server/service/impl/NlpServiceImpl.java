@@ -141,7 +141,7 @@ public class NlpServiceImpl implements INlpService {
 
     @Override
     public JsonResult retrievalChinese(NlpRequest nlpRequest) throws Exception {
-        String type = nlpRequest.getType();
+        String type = null == nlpRequest.getType() ? " " : nlpRequest.getType();
         String url = "";
         String accessToken = "";
         String res;

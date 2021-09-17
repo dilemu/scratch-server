@@ -37,7 +37,7 @@ public class HttpUtils {
 
     public static String post(String requestUrl, String accessToken, String contentType, String params, String encoding)
             throws Exception {
-        String token = Boolean.parseBoolean(accessToken)? "?access_token=" + accessToken: "";
+        String token = (null == accessToken || accessToken.isEmpty()) ? "" : "?access_token=" + accessToken;
         String url = requestUrl + token;
         return HttpUtils.postGeneralUrl(url, contentType, params, encoding);
     }
