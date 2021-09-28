@@ -151,7 +151,7 @@ public class NlpServiceImpl implements INlpService {
         String param = JsonUtils.objectToJson(paramsMap);
         switch (type) {
             case "poetry":
-                url = "http://iot.delightmom.com/api/poetry/retrieval";
+                url = "http://iot.delightmom.com:1036/api/poetry/retrieval";
                 accessToken = UserContextUtils.getAccessToken();
                 paramsMap.put("text", nlpRequest.getText());
                 paramsMap.remove("query");
