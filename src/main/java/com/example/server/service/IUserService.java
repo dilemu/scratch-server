@@ -11,4 +11,16 @@ public interface IUserService {
     JsonResult getUserInfo(String token) throws Exception;
 
     JsonResult verifyTimes(String token) throws Exception;
+
+    JsonResult userLogin(UserRequest requestVO) throws Exception;
+
+    JsonResult getCode(UserRequest requestVO) throws Exception;
+
+    JsonResult register(UserRequest requestVO) throws Exception;
+
+    JsonResult isRegister(UserRequest requestVO) throws Exception;
+
+    JsonResult getInfo(String token) throws Exception;
+
+    JsonResult getTimes(String token) throws Exception;
 }

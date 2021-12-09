@@ -1,12 +1,11 @@
 package com.example.server.model.vo;
 
-import com.example.server.exception.ExceptionResolvable;
 
 public class UserResult<T> {
 
     private String code;
     private T data;
-    private String msg;
+    private String message;
 
     /**
      * 只为序列化，不能使用
@@ -19,21 +18,20 @@ public class UserResult<T> {
      * 构造不对外
      *
      * @param code
-     * @param msg
+     * @param message
      * @param data
      */
-    private UserResult(String code, T data, String msg) {
+    private UserResult(String code, T data, String message) {
         super();
         this.code = code;
         this.data = data;
-        this.msg = msg;
+        this.message = message;
     }
 
     public UserResult(String message) {
         super();
-        this.msg = message;
+        this.message = message;
     }
-
 
     /**
      * 自定义成功信息
@@ -106,11 +104,11 @@ public class UserResult<T> {
         this.data = data;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String msg) {
+        this.message = msg;
     }
 }

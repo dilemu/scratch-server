@@ -2,9 +2,13 @@ package com.example.server.utils;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.io.BufferedReader;
@@ -12,8 +16,10 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * http 工具类
@@ -87,6 +93,31 @@ public class HttpUtils {
         HttpGet httpGet = new HttpGet(url);
         HttpClient client = HttpClientBuilder.create().build();
         HttpResponse response = client.execute(httpGet);
+        HttpEntity entity = response.getEntity();
+        String resBody = EntityUtils.toString(entity, "UTF-8");
+        return resBody;
+    }
+
+    public static String post(String url, Map<String, String> params) throws Exception {
+        HttpPost httpost = new HttpPost(url);
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+        Set<String> keySet = params.keySet();
+        for (String key : keySet) {
+            nvps.add(new BasicNameValuePair(key, params.get(key)));
+        }
+        httpost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpResponse response = client.execute(httpost);
+        HttpEntity entity = response.getEntity();
+        String resBody = EntityUtils.toString(entity, "UTF-8");
+        return resBody;
+    }
+
+    public static String post(String url, String token) throws Exception {
+        HttpPost httpost = new HttpPost(url);
+        httpost.setHeader("Access-Token", token);
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpResponse response = client.execute(httpost);
         HttpEntity entity = response.getEntity();
         String resBody = EntityUtils.toString(entity, "UTF-8");
         return resBody;

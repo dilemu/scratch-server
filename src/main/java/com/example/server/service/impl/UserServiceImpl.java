@@ -71,4 +71,92 @@ public class UserServiceImpl implements IUserService {
 
         return JsonResult.success(user.getData());
     }
+
+    @Override
+    public JsonResult userLogin(UserRequest requestVO) throws Exception {
+        Map<String, String> map = new HashMap<>();
+        map.put("account", requestVO.getAccount());
+        map.put("type", requestVO.getType());
+        if (requestVO.getType().equals("account")) {
+            map.put("password", requestVO.getCode());
+        } else {
+            map.put("code", requestVO.getCode());
+        }
+        String result = HttpUtils.post("http://iot.delightmom.com:1036/user/login", map);
+        UserResult user = JsonUtils.jsonToObject(result, UserResult.class);
+        if (!user.getCode().equals("200")) {
+            LOGGER.info(user.getMessage());
+            throw new BizBaseException(user.getMessage());
+        }
+        return JsonResult.success(user.getData());
+    }
+
+    @Override
+    public JsonResult getCode(UserRequest requestVO) throws Exception {
+        Map<String, String> map = new HashMap<>();
+        map.put("mobile", requestVO.getMobile());
+
+        String result = HttpUtils.post("http://iot.delightmom.com:1036/user/getCode", map);
+        UserResult user = JsonUtils.jsonToObject(result, UserResult.class);
+        if (!user.getCode().equals("200")) {
+            LOGGER.info(user.getMessage());
+            throw new BizBaseException(user.getMessage());
+        }
+        return JsonResult.success(user.getData());
+    }
+
+    @Override
+    public JsonResult register(UserRequest requestVO) throws Exception {
+        Map<String, String> map = new HashMap<>();
+        map.put("mobile", requestVO.getMobile());
+        map.put("password", requestVO.getCode());
+        map.put("code", requestVO.getCode());
+
+        String result = HttpUtils.post("http://iot.delightmom.com:1036/user/register", map);
+        UserResult user = JsonUtils.jsonToObject(result, UserResult.class);
+        if (!user.getCode().equals("200")) {
+            LOGGER.info(user.getMessage());
+            throw new BizBaseException(user.getMessage());
+        }
+        return JsonResult.success(user.getData());
+    }
+
+    @Override
+    public JsonResult isRegister(UserRequest requestVO) throws Exception {
+        Map<String, String> map = new HashMap<>();
+        map.put("mobile", requestVO.getMobile());
+
+        String result = HttpUtils.post("http://iot.delightmom.com:1036/user/isRegister", map);
+        UserResult user = JsonUtils.jsonToObject(result, UserResult.class);
+        if (!user.getCode().equals("200")) {
+            LOGGER.info(user.getMessage());
+            throw new BizBaseException(user.getMessage());
+        }
+        return JsonResult.success(user.getData());
+    }
+
+    @Override
+    public JsonResult getInfo(String token) throws Exception {
+        String result = HttpUtils.post("http://iot.delightmom.com:1036/user/info", token);
+        UserResult user = JsonUtils.jsonToObject(result, UserResult.class);
+        if (!user.getCode().equals("200")) {
+            LOGGER.info(user.getMessage());
+            throw new BizBaseException(user.getMessage());
+        }
+        return JsonResult.success(user.getData());
+    }
+
+    @Override
+    public JsonResult getTimes(String token) throws Exception {
+        String result = HttpUtils.post("http://iot.delightmom.com:1036/user/times", token);
+        UserResult user = JsonUtils.jsonToObject(result, UserResult.class);
+        if (user.getMessage().equals("not enough times")) {
+            LOGGER.info("账号余额不足");
+            throw new BizBaseException(401, "账号余额不足");
+        } else if (user.getMessage().equals("token error")) {
+            LOGGER.info("token无效，请重新登录");
+            throw new BizBaseException(402, "token无效，请重新登录");
+        }
+        return JsonResult.success(user.getData());
+    }
 }
