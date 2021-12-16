@@ -4,7 +4,6 @@ package com.example.server.controller;
 import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.model.vo.UserRequest;
-import com.example.server.model.vo.UserResult;
 import com.example.server.service.IUserService;
 import com.example.server.utils.StringUtils;
 import com.example.server.utils.UserContextUtils;
@@ -46,16 +45,16 @@ public class UserController {
         return userService.getUserInfo(token);
     }
 
-    @GetMapping("v1/times")
-    @ApiOperation(value = "用户次数验证")
-    private JsonResult getAITimes() throws Exception {
-        String token = UserContextUtils.getAccessToken();
-        if (StringUtils.isEmpty(token)) {
-            throw new BizBaseException("token为空");
-        }
-
-        return userService.verifyTimes(token);
-    }
+//    @GetMapping("v1/times")
+//    @ApiOperation(value = "用户次数验证")
+//    private JsonResult getAITimes() throws Exception {
+//        String token = UserContextUtils.getAccessToken();
+//        if (StringUtils.isEmpty(token)) {
+//            throw new BizBaseException("token为空");
+//        }
+//
+//        return userService.verifyTimes(token);
+//    }
 
     @PostMapping("/login")
     @ApiOperation(value = "用户登录校验")
@@ -124,14 +123,14 @@ public class UserController {
         return userService.getInfo(token);
     }
 
-    @PostMapping("/times")
-    @ApiOperation(value = "用户信息查询")
-    private JsonResult getTimes() throws Exception {
-        String token = UserContextUtils.getAccessToken();
-        if (StringUtils.isEmpty(token)) {
-            throw new BizBaseException("token为空");
-        }
-
-        return userService.getTimes(token);
-    }
+//    @PostMapping("/times")
+//    @ApiOperation(value = "用户信息查询")
+//    private JsonResult getTimes() throws Exception {
+//        String token = UserContextUtils.getAccessToken();
+//        if (StringUtils.isEmpty(token)) {
+//            throw new BizBaseException("token为空");
+//        }
+//
+//        return userService.getTimes(token);
+//    }
 }

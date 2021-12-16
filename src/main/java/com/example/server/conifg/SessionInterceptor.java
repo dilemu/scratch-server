@@ -1,5 +1,6 @@
 package com.example.server.conifg;
 
+import com.example.server.exception.BizBaseException;
 import com.example.server.model.vo.JsonResult;
 import com.example.server.service.IUserService;
 import org.slf4j.Logger;
@@ -25,7 +26,11 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String access_token = request.getHeader("Access-Token");
-        JsonResult user = userService.verifyTimes(access_token);
+        if (null == access_token) {
+            throw new BizBaseException("token为空，请先登录");
+        }
+        
+        JsonResult user = userService.getTimes(access_token);
         LOGGER.info("userInfo: " + user.getData());
         return true;
     }
