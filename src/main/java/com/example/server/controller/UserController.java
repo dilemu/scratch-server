@@ -12,6 +12,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Api("用户信息")
 @RestController
 @RequestMapping("/user")
@@ -59,18 +63,38 @@ public class UserController {
     @PostMapping("/login")
     @ApiOperation(value = "用户登录校验")
     private JsonResult login(@RequestBody UserRequest requestVO) throws Exception {
-        if (StringUtils.isEmpty(requestVO.getAccount())) {
+        String account = requestVO.getAccount();
+        String type = requestVO.getType();
+        String code = requestVO.getCode();
+        List<String> typeLegalList = Arrays.asList("account", "phone");
+
+        if (StringUtils.isEmpty(account)) {
             throw new BizBaseException("账号不可为空");
         }
-        String type = requestVO.getType();
-        if (StringUtils.isEmpty(type)) {
+
+        switch (type) {
+            case "account":
+            case "phone":
+                break;
+            default:
+                throw new BizBaseException("登录类型不正确");
+        }
+
+        if(StringUtils.isEmpty(type)) {
             throw new BizBaseException("登录类型为空");
         }
-        if (StringUtils.isEmpty(requestVO.getCode())) {
+
+        if(!typeLegalList.contains(type)) {
+            throw new BizBaseException("登录类型不正确");
+        }
+
+        if (StringUtils.isEmpty(code)) {
             if (type.equals("account")) {
                 throw new BizBaseException("密码不可为空");
-            } else {
+            } else if(type.equals("phone")) {
                 throw new BizBaseException("验证码不可为空");
+            } else {
+                throw  new BizBaseException("未知错误");
             }
         }
         return userService.userLogin(requestVO);

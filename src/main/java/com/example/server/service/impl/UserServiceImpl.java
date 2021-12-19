@@ -79,9 +79,12 @@ public class UserServiceImpl implements IUserService {
         map.put("type", requestVO.getType());
         if (requestVO.getType().equals("account")) {
             map.put("password", requestVO.getCode());
-        } else {
+        }
+
+        if(requestVO.getType().equals("phone")) {
             map.put("code", requestVO.getCode());
         }
+
         String result = HttpUtils.post("http://iot.delightmom.com:1036/user/login", map);
         UserResult user = JsonUtils.jsonToObject(result, UserResult.class);
         if (!user.getCode().equals("200")) {
