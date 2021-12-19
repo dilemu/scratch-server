@@ -25,6 +25,7 @@ public class SessionInterceptor implements HandlerInterceptor {
     //请求处理前调用,我们只需要在这里写验证登陆状态的业务逻辑，就可以在用户调用指定接口之前验证登陆状态了
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if(request.getMethod().toUpperCase().equals("OPTIONS")) { return true;};
         String access_token = request.getHeader("Access-Token");
         if (null == access_token) {
             throw new BizBaseException("token为空，请先登录");
