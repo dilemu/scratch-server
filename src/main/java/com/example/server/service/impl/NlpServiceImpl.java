@@ -157,7 +157,7 @@ public class NlpServiceImpl implements INlpService {
                 paramsMap.remove("query");
                 StopWatch sw1 = new StopWatch();
                 sw1.start();
-                res = HttpUtils.post(url, accessToken, "application/json", JsonUtils.objectToJson(paramsMap));
+                res = HttpUtils.doPost(url, accessToken, paramsMap);
                 Map resMap = (Map) JsonUtils.jsonToObject(res, Object.class);
                 if (!resMap.get("code").toString().equals("0")) {
                     throw new BizBaseException(Integer.parseInt(resMap.get("code").toString()), resMap.get("message").toString());

@@ -122,4 +122,20 @@ public class HttpUtils {
         String resBody = EntityUtils.toString(entity, "UTF-8");
         return resBody;
     }
+
+    public static String doPost(String url, String token, Map<String, String> params) throws Exception {
+        HttpPost httpost = new HttpPost(url);
+        httpost.setHeader("Access-Token", token);
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+        Set<String> keySet = params.keySet();
+        for (String key : keySet) {
+            nvps.add(new BasicNameValuePair(key, params.get(key)));
+        }
+        httpost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpResponse response = client.execute(httpost);
+        HttpEntity entity = response.getEntity();
+        String resBody = EntityUtils.toString(entity, "UTF-8");
+        return resBody;
+    }
 }
